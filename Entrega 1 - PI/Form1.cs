@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,6 +19,8 @@ namespace Entrega_1___PI
             InitializeComponent();
             lblVersao.Text = Jogo.versao;
         }
+        private int _idPartidaSelecionada;
+        private int _senhaPartidaSelecionada;
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -44,6 +47,7 @@ namespace Entrega_1___PI
             string[] dadosPartida = partida.Split(',');
 
             int idPartida = int.Parse(dadosPartida[0]);
+            _idPartidaSelecionada = idPartida;
             string nomePartida = dadosPartida[1];
             string dataPartida = dadosPartida[2];
 
@@ -61,7 +65,9 @@ namespace Entrega_1___PI
             retorno = retorno.Replace("/r", "");
             string[] jogadores = retorno.Split('\n');
 
-            if(jogadores.Length == 1 ){
+            lblPatidaSelecionada.Text = "Partida Selecionada: " + nomePartida;
+
+            if (jogadores.Length == 1 ){
                 lstJogadoresDaPartida.Items.Clear();
                 MessageBox.Show("Nenhum jogador encontrado na partida: " + partida);
                 return;
@@ -73,6 +79,7 @@ namespace Entrega_1___PI
             {
                 lstJogadoresDaPartida.Items.Add(jogadores[i]);
             }
+
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -159,5 +166,61 @@ namespace Entrega_1___PI
         {
 
         }
+
+        private void label6_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEntrarPartida_Click(object sender, EventArgs e)
+        {
+            string senhaPartida = txtEntrarPartida.Text;
+            string nomeJogador = "Carnivoros";
+
+            if (senhaPartida == "" || nomeJogador == "")
+            {
+                MessageBox.Show("Preencha todos os campos para entrar em uma partida");
+                return;
+            }
+
+            if (senhaPartida.Contains(",") || nomeJogador.Contains(","))
+            {
+                MessageBox.Show("Os campos não podem conter vírgulas");
+                return;
+            }
+
+            if(nomeJogador.Length > 20)
+            {
+                MessageBox.Show("O nome não pode conter mais do que 20 caracteres");
+                return;
+            }
+
+            if (senhaPartida.Length > 10)
+            {
+                MessageBox.Show("A senha não pode conter mais do que 10 caracteres");
+                return;
+            }
+
+            if(_idPartidaSelecionada == 0)
+            {
+                MessageBox.Show("Selecione uma partida para entrar");
+                return;
+            }
+
+            string entrar = Jogo.Entrar(_idPartidaSelecionada, nomeJogador, senhaPartida);
+            lblIdJogador.Text = "ID do Jogador: " + entrar[0];
+            if (lblIdJogador.Text == "ID do Jogador: E")
+            {
+                MessageBox.Show("A senha está errada! Tente novamente com a senha certa.");
+                return;
+            }
+            lblSenhaJogador.Text = "Senha do Jogador: " + entrar[1];
+        }
+
     }
 }
