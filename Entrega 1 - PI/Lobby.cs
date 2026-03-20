@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Draft;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlTypes;
 using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Draft;
 
 namespace Entrega_1___PI
 {
@@ -37,7 +38,6 @@ namespace Entrega_1___PI
         }
 
         private int _idPartidaSelecionada;
-        private int _senhaPartidaSelecionada;
         private bool _formCarregado = false;
 
         private void button1_Click(object sender, EventArgs e)
@@ -183,14 +183,22 @@ namespace Entrega_1___PI
             }
 
             string entrar = Jogo.Entrar(_idPartidaSelecionada, nomeJogador, senhaPartida);
-            MessageBox.Show("Retorno completo: " + entrar);
-            string[] partes = entrar.Split(',');
-            lblIdJogador.Text = "ID do Jogador: " + partes[0];
-            if (lblIdJogador.Text == "ID do Jogador: E")
+
+            if (entrar.StartsWith("ERRO"))
             {
                 MessageBox.Show("A senha está errada! Tente novamente com a senha certa.");
                 return;
             }
+
+            string[] partes = entrar.Split(',');
+
+            if (partes.Length < 2)
+            {
+                MessageBox.Show("Retorno inesperado: " + entrar); // debug
+                return;
+            }
+
+            lblIdJogador.Text = "ID do Jogador: " + partes[0];
             lblSenhaJogador.Text = "Senha do Jogador: " + partes[1];
 
         }
@@ -225,7 +233,11 @@ namespace Entrega_1___PI
             int idJogadorInt = int.Parse(idJogador);
             string iniciar = Jogo.Iniciar(idJogadorInt, senhaJogador);
 
-            Tabuleiro tabuleiro = new Tabuleiro();
+            Jogador jogador = new Jogador();
+            jogador.Id = idJogadorInt;
+            jogador.Senha = senhaJogador;
+
+            Tabuleiro tabuleiro = new Tabuleiro(jogador, iniciar);
             tabuleiro.ShowDialog();
 
             MessageBox.Show("Partida iniciada! Jogador sorteado para começar: " + iniciar);

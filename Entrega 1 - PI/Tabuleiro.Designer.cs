@@ -35,7 +35,7 @@
             // lblMao
             // 
             this.lblMao.AutoSize = true;
-            this.lblMao.Location = new System.Drawing.Point(93, 731);
+            this.lblMao.Location = new System.Drawing.Point(93, 848);
             this.lblMao.Name = "lblMao";
             this.lblMao.Size = new System.Drawing.Size(95, 13);
             this.lblMao.TabIndex = 0;
@@ -44,7 +44,7 @@
             // 
             // btnExibirMao
             // 
-            this.btnExibirMao.Location = new System.Drawing.Point(12, 726);
+            this.btnExibirMao.Location = new System.Drawing.Point(12, 843);
             this.btnExibirMao.Name = "btnExibirMao";
             this.btnExibirMao.Size = new System.Drawing.Size(75, 23);
             this.btnExibirMao.TabIndex = 1;
@@ -58,11 +58,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Entrega_1___PI.Properties.Resources.Tabuleiro_PI;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(641, 795);
+            this.ClientSize = new System.Drawing.Size(731, 940);
             this.Controls.Add(this.btnExibirMao);
             this.Controls.Add(this.lblMao);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Tabuleiro";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tabuleiro";
+            this.Load += new System.EventHandler(this.Tabuleiro_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
