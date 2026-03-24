@@ -15,12 +15,18 @@ namespace Entrega_1___PI
 {
     public partial class Lobby : Form
     {
-        public Lobby()
+        public Lobby() 
         {
             InitializeComponent();
+        }
+
+        private void Lobby_Load_1(object sender, EventArgs e)
+        {
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                return;
             lblVersao.Text = Jogo.versao;
 
-            dgvListaPartida.DataSource = Partida.ListarPartidas();
+            ConfigurarDgv();
             dgvListaPartida.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvListaPartida.MultiSelect = false;
             dgvListaPartida.EditMode = DataGridViewEditMode.EditProgrammatically;
@@ -28,12 +34,6 @@ namespace Entrega_1___PI
             dgvListaPartida.AllowUserToResizeColumns = false;
             dgvListaPartida.RowHeadersVisible = false;
 
-            ConfigurarDgv();
-        }
-
-        private void Lobby_Load_1(object sender, EventArgs e)
-        {
-            ConfigurarDgv();
             _formCarregado = true;
         }
 
@@ -101,7 +101,7 @@ namespace Entrega_1___PI
         {
             string nomePartida = txtNomePartida.Text;
             string senhaPartida = txtSenhaPartida.Text;
-            string nomeGrupo = "Carnivoros";
+            string nomeGrupo = "Carnívoros";
 
             if(nomePartida == "" || senhaPartida == "" || nomeGrupo == "")
             {
@@ -249,20 +249,38 @@ namespace Entrega_1___PI
         }
         private void ConfigurarDgv()
         {
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                return;
 
-            dgvListaPartida.DataSource = null;
-            dgvListaPartida.DataSource = Partida.ListarPartidas();
+            var lista = Partida.ListarPartidas();
+            if (lista == null) return;
 
-            dgvListaPartida.Columns["id"].Visible = false;
-            dgvListaPartida.Columns["data"].Visible = false;
-            dgvListaPartida.Columns["nome"].HeaderText = "Nome";
-            dgvListaPartida.Columns["nome"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvListaPartida.Columns["status"].HeaderText = "Status";
-            dgvListaPartida.Columns["status"].Width = 50;
+            dgvListaPartida.DataSource = lista;
+
+            if (dgvListaPartida.Columns["id"] != null)
+                dgvListaPartida.Columns["id"].Visible = false;
+
+            if (dgvListaPartida.Columns["data"] != null)
+                dgvListaPartida.Columns["data"].Visible = false;
+
+            if (dgvListaPartida.Columns["nome"] != null)
+            {
+                dgvListaPartida.Columns["nome"].HeaderText = "Nome";
+                dgvListaPartida.Columns["nome"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+
+            if (dgvListaPartida.Columns["status"] != null)
+            {
+                dgvListaPartida.Columns["status"].HeaderText = "Status";
+                dgvListaPartida.Columns["status"].Width = 50;
+            }
         }
 
         private void dgvListaPartida_SelectionChanged(object sender, EventArgs e)
         {
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
+                return;
+
             if (!_formCarregado) return;
             if (dgvListaPartida.SelectedRows.Count == 0) return;
 
