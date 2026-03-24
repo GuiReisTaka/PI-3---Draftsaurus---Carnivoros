@@ -242,9 +242,9 @@
             // 
             // btnCriarPartida
             // 
-            this.btnCriarPartida.Location = new System.Drawing.Point(540, 247);
+            this.btnCriarPartida.Location = new System.Drawing.Point(536, 247);
             this.btnCriarPartida.Name = "btnCriarPartida";
-            this.btnCriarPartida.Size = new System.Drawing.Size(88, 33);
+            this.btnCriarPartida.Size = new System.Drawing.Size(92, 33);
             this.btnCriarPartida.TabIndex = 20;
             this.btnCriarPartida.Text = "Criar Partida";
             this.btnCriarPartida.UseVisualStyleBackColor = true;
@@ -254,7 +254,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(800, 52);
+            this.label6.Location = new System.Drawing.Point(802, 52);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(128, 19);
             this.label6.TabIndex = 21;
@@ -323,9 +323,9 @@
             // 
             // btnEntrarPartida
             // 
-            this.btnEntrarPartida.Location = new System.Drawing.Point(823, 247);
+            this.btnEntrarPartida.Location = new System.Drawing.Point(806, 247);
             this.btnEntrarPartida.Name = "btnEntrarPartida";
-            this.btnEntrarPartida.Size = new System.Drawing.Size(107, 33);
+            this.btnEntrarPartida.Size = new System.Drawing.Size(124, 33);
             this.btnEntrarPartida.TabIndex = 23;
             this.btnEntrarPartida.Text = "Entrar na Patida";
             this.btnEntrarPartida.UseVisualStyleBackColor = true;
