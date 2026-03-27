@@ -1,13 +1,14 @@
-﻿using System;
+﻿using Draft;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Draft;
 
 namespace Entrega_1___PI
 {
@@ -15,16 +16,169 @@ namespace Entrega_1___PI
     {
         private Jogador jogadorAtual;
         private string jogadorSorteado;
-        public Tabuleiro(Jogador jogador, string JogadorSorteado)
+        private int IdPartida;
+        public Tabuleiro(Jogador jogador, string JogadorSorteado, int idPartida)
         {
             InitializeComponent();
             jogadorAtual = jogador;
             jogadorSorteado = JogadorSorteado;
-            
+            IdPartida = idPartida;
+
         }
         private void Tabuleiro_Load(object sender, EventArgs e)
         {
-            MessageBox.Show("Partida iniciada! Jogador sorteado para começar: " + jogadorSorteado);
+            string[] dadosSorteado = jogadorSorteado.Split(',');
+            lblJogadorSorteado.Text = "Jogador Sorteado: " + dadosSorteado[1];
+
+            string retorno = Jogo.ListarJogadores(IdPartida);
+            if (retorno.StartsWith("ERRO"))
+            {
+                MessageBox.Show("Erro ao listar jogadores da partida");
+                return;
+            }
+
+            retorno = retorno.Replace("\r", "");
+            string[] jogadores = retorno.Split('\n');
+
+            lstJogadoresNaPartida.Items.Clear();
+            for (int i = 0; i < jogadores.Length - 1; i++)
+            {
+                lstJogadoresNaPartida.Items.Add(jogadores[i]);
+            }
+
+            string turno = Jogo.VerificarPartida(IdPartida);
+            string[] dadosTurno = turno.Split(',');
+            lblTurno.Text = "Turno: " + dadosTurno[1];
+
+            string codigoDado = dadosTurno[4];
+
+            string facesRetorno = Jogo.ListarFacesDado();
+            facesRetorno = facesRetorno.Replace("\r", "");
+            string[] faces = facesRetorno.Split('\n');
+            foreach (string face in faces)
+            {
+                string[] dadosFace = face.Split(',');
+                if (dadosFace[0].Trim() == codigoDado.Trim())
+                {
+                    lblFaceDado.Text = "Face do Dado: " + dadosFace[1];
+                    break;
+                }
+            }
+
+            string idJogadorDado = dadosTurno[3];
+
+            foreach (string jogador in jogadores)
+            {
+                string[] dadosJogador = jogador.Split(',');
+                if (dadosJogador[0] == idJogadorDado)
+                {
+                    lblJogadorSorteado.Text = "Jogador Sorteado: " + dadosJogador[1];
+                    break;
+                }
+            }
+
+            VerificarVezDeJogar.Start();
+        }
+
+        private void RealizarJogada()
+        {
+            string turno = Jogo.VerificarPartida(IdPartida);
+            string[] dadosTurno = turno.Split(',');
+            if (dadosTurno[2] != "A")
+                return;
+
+            string idJogadorDado = dadosTurno[3];
+            string codigoDado = dadosTurno[4].Trim();
+
+            string turnoDetalhado = Jogo.VerificarTurno(IdPartida);
+            turnoDetalhado = turnoDetalhado.Replace("\r", "");
+            string[] linhasTurno = turnoDetalhado.Split('\n');
+
+            bool jaJogou = false;
+            for (int i = 1; i < linhasTurno.Length; i++)
+            {
+                string[] dadosJogada = linhasTurno[i].Split(',');
+                if (dadosJogada[0].Trim() == jogadorAtual.Id.ToString())
+                {
+                    jaJogou = true;
+                    break;
+                }
+            }
+            if (jaJogou) return;
+
+            // Pega o estado do tabuleiro antes de tudo
+            EstadoTabuleiro estadoTabuleiro = new EstadoTabuleiro(jogadorAtual);
+            Dictionary<string, string> estado = estadoTabuleiro.ObterEstado();
+
+            // Pega o dinossauro da mão
+            string mao = Jogo.ExibirMao(jogadorAtual.Id, jogadorAtual.Senha);
+            mao = mao.Replace("\r", "");
+            string[] dinossauros = mao.Split('\n');
+
+            string dinossauroEscolhido = "";
+            for (int i = 1; i < dinossauros.Length; i++)
+            {
+                if (dinossauros[i].Trim() != "")
+                {
+                    string[] dadosDino = dinossauros[i].Split(',');
+                    dinossauroEscolhido = dadosDino[0].Trim();
+                    break;
+                }
+            }
+
+            if (dinossauroEscolhido == "")
+            {
+                MessageBox.Show("Nenhum dinossauro na mão!");
+                return;
+            }
+
+            // Define cercados válidos baseado no dado
+            List<string> cercadosValidos = new List<string>();
+
+            if (codigoDado == "AL")
+                cercadosValidos.AddRange(new[] { "FI", "MT", "PA" });
+            else if (codigoDado == "WC")
+                cercadosValidos.AddRange(new[] { "RS", "CD", "IS" });
+            else if (codigoDado == "FL")
+                cercadosValidos.AddRange(new[] { "FI", "MT", "RS" });
+            else if (codigoDado == "PR")
+                cercadosValidos.AddRange(new[] { "PA", "CD", "IS" });
+            else if (codigoDado == "TI")
+            {
+                string[] todosCercados = { "FI", "MT", "PA", "RS", "CD", "IS", "RI" };
+                foreach (string cercado in todosCercados)
+                {
+                    if (!estado.ContainsKey(cercado) || estado[cercado] != "Ti")
+                        cercadosValidos.Add(cercado);
+                }
+            }
+            else if (codigoDado == "VZ")
+            {
+                string[] todosCercados = { "FI", "MT", "PA", "RS", "CD", "IS", "RI" };
+                foreach (string cercado in todosCercados)
+                {
+                    if (!estado.ContainsKey(cercado))
+                        cercadosValidos.Add(cercado);
+                }
+            }
+            else
+                cercadosValidos.AddRange(new[] { "FI", "MT", "PA", "RS", "CD", "IS", "RI" });
+
+            Dictionary<string, int> quantidade = estadoTabuleiro.ObterQuantidadePorCercado();
+            ValidadorCercado validador = new ValidadorCercado(estado, quantidade);
+            string cercadoEscolhido = "RI"; // padrão é o Rio se nenhum cercado for válido
+
+            foreach (string cercado in cercadosValidos)
+            {
+                if (validador.PodeJogarEm(cercado, dinossauroEscolhido))
+                {
+                    cercadoEscolhido = cercado;
+                    break;
+                }
+            }
+
+            string resultado = Jogo.Jogar(jogadorAtual.Id, jogadorAtual.Senha, dinossauroEscolhido, cercadoEscolhido);
+            MessageBox.Show("Jogada realizada! O dinossauro: " + dinossauroEscolhido + " foi colocado no cercado: " + cercadoEscolhido + "\nPróximo turno: " + resultado);
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -37,6 +191,21 @@ namespace Entrega_1___PI
             lblMao.Text = ("Meus Dinossauros: " + Draft.Jogo.ExibirMao(jogadorAtual.Id, jogadorAtual.Senha));
         }
 
-        
+        private void lblTurno_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void VerificarVezDeJogar_Tick(object sender, EventArgs e)
+        {
+            VerificarVezDeJogar.Stop();
+            RealizarJogada();
+            VerificarVezDeJogar.Start();
+        }
+
+        private void txtExibirTabuleiro_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

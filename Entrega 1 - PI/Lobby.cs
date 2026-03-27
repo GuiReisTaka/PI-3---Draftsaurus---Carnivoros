@@ -236,11 +236,12 @@ namespace Entrega_1___PI
             Jogador jogador = new Jogador();
             jogador.Id = idJogadorInt;
             jogador.Senha = senhaJogador;
+            Partida partida = new Partida();
+            partida.id = _idPartidaSelecionada;
 
-            Tabuleiro tabuleiro = new Tabuleiro(jogador, iniciar);
+            Tabuleiro tabuleiro = new Tabuleiro(jogador, iniciar, _idPartidaSelecionada);
             tabuleiro.ShowDialog();
 
-            MessageBox.Show("Partida iniciada! Jogador sorteado para começar: " + iniciar);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

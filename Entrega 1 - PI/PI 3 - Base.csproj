@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EstadoTabuleiro.cs" />
     <Compile Include="Jogador.cs" />
     <Compile Include="Lobby.cs">
       <SubType>Form</SubType>
@@ -65,6 +66,7 @@
     <Compile Include="Tabuleiro.Designer.cs">
       <DependentUpon>Tabuleiro.cs</DependentUpon>
     </Compile>
+    <Compile Include="ValidadorCercado.cs" />
     <EmbeddedResource Include="Lobby.resx">
       <DependentUpon>Lobby.cs</DependentUpon>
     </EmbeddedResource>
