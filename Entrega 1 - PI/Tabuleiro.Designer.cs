@@ -128,18 +128,22 @@
             // 
             // btnExibirTabuleiro
             // 
-            this.btnExibirTabuleiro.Location = new System.Drawing.Point(426, 12);
+            this.btnExibirTabuleiro.Location = new System.Drawing.Point(561, 74);
             this.btnExibirTabuleiro.Name = "btnExibirTabuleiro";
             this.btnExibirTabuleiro.Size = new System.Drawing.Size(88, 23);
             this.btnExibirTabuleiro.TabIndex = 5;
             this.btnExibirTabuleiro.Text = "ExibirTabuleiro";
             this.btnExibirTabuleiro.UseVisualStyleBackColor = true;
+            this.btnExibirTabuleiro.Click += new System.EventHandler(this.btnExibirTabuleiro_Click);
             // 
             // txtExibirTabuleiro
             // 
             this.txtExibirTabuleiro.Location = new System.Drawing.Point(520, 12);
+            this.txtExibirTabuleiro.Multiline = true;
             this.txtExibirTabuleiro.Name = "txtExibirTabuleiro";
-            this.txtExibirTabuleiro.Size = new System.Drawing.Size(174, 20);
+            this.txtExibirTabuleiro.ReadOnly = true;
+            this.txtExibirTabuleiro.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtExibirTabuleiro.Size = new System.Drawing.Size(174, 57);
             this.txtExibirTabuleiro.TabIndex = 6;
             this.txtExibirTabuleiro.TextChanged += new System.EventHandler(this.txtExibirTabuleiro_TextChanged);
             // 

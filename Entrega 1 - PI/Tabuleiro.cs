@@ -23,7 +23,6 @@ namespace Entrega_1___PI
             jogadorAtual = jogador;
             jogadorSorteado = JogadorSorteado;
             IdPartida = idPartida;
-
         }
         private void Tabuleiro_Load(object sender, EventArgs e)
         {
@@ -79,6 +78,9 @@ namespace Entrega_1___PI
 
             VerificarVezDeJogar.Start();
         }
+
+
+
 
         private void RealizarJogada()
         {
@@ -165,7 +167,8 @@ namespace Entrega_1___PI
                 cercadosValidos.AddRange(new[] { "FI", "MT", "PA", "RS", "CD", "IS", "RI" });
 
             Dictionary<string, int> quantidade = estadoTabuleiro.ObterQuantidadePorCercado();
-            ValidadorCercado validador = new ValidadorCercado(estado, quantidade);
+            Dictionary<string, List<string>> dinosPorCercado = estadoTabuleiro.ObterDinosPorCercado();
+            ValidadorCercado validador = new ValidadorCercado(estado, quantidade, dinosPorCercado);
             string cercadoEscolhido = "RI"; // padrão é o Rio se nenhum cercado for válido
 
             foreach (string cercado in cercadosValidos)
@@ -178,7 +181,7 @@ namespace Entrega_1___PI
             }
 
             string resultado = Jogo.Jogar(jogadorAtual.Id, jogadorAtual.Senha, dinossauroEscolhido, cercadoEscolhido);
-            MessageBox.Show("Jogada realizada! O dinossauro: " + dinossauroEscolhido + " foi colocado no cercado: " + cercadoEscolhido + "\nPróximo turno: " + resultado);
+            MessageBox.Show("Jogada realizada! O dinossauro: " + dinossauroEscolhido + " foi colocado no cercado: " + cercadoEscolhido);
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -196,9 +199,47 @@ namespace Entrega_1___PI
 
         }
 
+
+        private void AtualizarInfoTurno()
+        {
+            string turno = Jogo.VerificarPartida(IdPartida);
+            string[] dadosTurno = turno.Split(',');
+            lblTurno.Text = "Turno: " + dadosTurno[1];
+
+            string codigoDado = dadosTurno[4];
+            string facesRetorno = Jogo.ListarFacesDado();
+            facesRetorno = facesRetorno.Replace("\r", "");
+            string[] faces = facesRetorno.Split('\n');
+            foreach (string face in faces)
+            {
+                string[] dadosFace = face.Split(',');
+                if (dadosFace[0].Trim() == codigoDado.Trim())
+                {
+                    lblFaceDado.Text = "Face do Dado: " + dadosFace[1];
+                    break;
+                }
+            }
+
+            string retornoJogadores = Jogo.ListarJogadores(IdPartida);
+            retornoJogadores = retornoJogadores.Replace("\r", "");
+            string[] jogadores = retornoJogadores.Split('\n');
+            string idJogadorDado = dadosTurno[3];
+            foreach (string jogador in jogadores)
+            {
+                string[] dadosJogador = jogador.Split(',');
+                if (dadosJogador[0] == idJogadorDado)
+                {
+                    lblJogadorSorteado.Text = "Jogador Sorteado: " + dadosJogador[1];
+                    break;
+                }
+            }
+        }
+
+
         private void VerificarVezDeJogar_Tick(object sender, EventArgs e)
         {
             VerificarVezDeJogar.Stop();
+            AtualizarInfoTurno();
             RealizarJogada();
             VerificarVezDeJogar.Start();
         }
@@ -206,6 +247,12 @@ namespace Entrega_1___PI
         private void txtExibirTabuleiro_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnExibirTabuleiro_Click(object sender, EventArgs e)
+        {
+            string tabuleiro = Jogo.ExibirTabuleiro(jogadorAtual.Id, jogadorAtual.Senha);
+            txtExibirTabuleiro.Text = tabuleiro;
         }
     }
 }

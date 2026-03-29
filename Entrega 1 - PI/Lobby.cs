@@ -103,33 +103,13 @@ namespace Entrega_1___PI
             string senhaPartida = txtSenhaPartida.Text;
             string nomeGrupo = "Carnívoros";
 
-            if(nomePartida == "" || senhaPartida == "" || nomeGrupo == "")
+            string resultado = Jogo.CriarPartida(nomePartida, senhaPartida, nomeGrupo);
+            if (resultado.StartsWith("ERRO"))
             {
-                MessageBox.Show("Preencha todos os campos para criar uma partida");
+                MessageBox.Show(resultado);
                 return;
             }
-
-            if(nomePartida.Contains(",") || senhaPartida.Contains(",") || nomeGrupo.Contains(","))
-            {
-                MessageBox.Show("Os campos não podem conter vírgulas");
-                return;
-            }
-
-            if(nomePartida.Length > 15)
-            {
-                MessageBox.Show("O nome não pode conter mais do que 15 caracteres");
-                return;
-            }
-
-            if (senhaPartida.Length > 10)
-            {
-                MessageBox.Show("A senha não pode conter mais do que 10 caracteres");
-                return;
-            }
-
-            string id = Jogo.CriarPartida(nomePartida, senhaPartida, nomeGrupo);
-            lblIdPartidaCriada.Text = "ID da Partida Criada: " + id;
-
+            lblIdPartidaCriada.Text = "ID da Partida Criada: " + resultado;
         }
 
         private void lblDataPartida_Click(object sender, EventArgs e)
@@ -152,55 +132,22 @@ namespace Entrega_1___PI
             string senhaPartida = txtEntrarPartida.Text;
             string nomeJogador = "Carnivoros";
 
-            if (senhaPartida == "" || nomeJogador == "")
-            {
-                MessageBox.Show("Preencha todos os campos para entrar em uma partida");
-                return;
-            }
-
-            if (senhaPartida.Contains(",") || nomeJogador.Contains(","))
-            {
-                MessageBox.Show("Os campos não podem conter vírgulas");
-                return;
-            }
-
-            if(nomeJogador.Length > 20)
-            {
-                MessageBox.Show("O nome não pode conter mais do que 20 caracteres");
-                return;
-            }
-
-            if (senhaPartida.Length > 10)
-            {
-                MessageBox.Show("A senha não pode conter mais do que 10 caracteres");
-                return;
-            }
-
-            if(_idPartidaSelecionada == 0)
+            if (_idPartidaSelecionada == 0)
             {
                 MessageBox.Show("Selecione uma partida para entrar");
                 return;
             }
 
             string entrar = Jogo.Entrar(_idPartidaSelecionada, nomeJogador, senhaPartida);
-
             if (entrar.StartsWith("ERRO"))
             {
-                MessageBox.Show("A senha está errada! Tente novamente com a senha certa.");
+                MessageBox.Show(entrar);
                 return;
             }
 
             string[] partes = entrar.Split(',');
-
-            if (partes.Length < 2)
-            {
-                MessageBox.Show("Retorno inesperado: " + entrar); // debug
-                return;
-            }
-
             lblIdJogador.Text = "ID do Jogador: " + partes[0];
             lblSenhaJogador.Text = "Senha do Jogador: " + partes[1];
-
         }
 
         private void groupBox3_Enter(object sender, EventArgs e)

@@ -39,6 +39,7 @@ namespace Entrega_1___PI
             return estado;
         }
 
+        //Obtem a quantidade de dinossauros em cada cercado, para facilitar a validação das jogadas
         public Dictionary<string, int> ObterQuantidadePorCercado()
         {
             Dictionary<string, int> quantidade = new Dictionary<string, int>();
@@ -67,6 +68,31 @@ namespace Entrega_1___PI
             }
 
             return quantidade;
+        }
+
+        //Obtem quais dinossauros estão em cada cercado, para facilitar a validação das jogadas
+        public Dictionary<string, List<string>> ObterDinosPorCercado()
+        {
+            Dictionary<string, List<string>> dinos = new Dictionary<string, List<string>>();
+            string tabuleiro = Jogo.ExibirTabuleiro(_jogador.Id, _jogador.Senha);
+            if (tabuleiro.StartsWith("ERRO"))
+                return dinos;
+            tabuleiro = tabuleiro.Replace("\r", "");
+            string[] linhas = tabuleiro.Split('\n');
+            foreach (string linha in linhas)
+            {
+                if (linha.Trim() == "") continue;
+                string[] dados = linha.Split(',');
+                if (dados.Length >= 2)
+                {
+                    string cercado = dados[0].Trim();
+                    string dino = dados[1].Trim();
+                    if (!dinos.ContainsKey(cercado))
+                        dinos[cercado] = new List<string>();
+                    dinos[cercado].Add(dino);
+                }
+            }
+            return dinos;
         }
     }
 }

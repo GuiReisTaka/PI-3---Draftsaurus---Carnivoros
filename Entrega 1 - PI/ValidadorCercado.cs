@@ -10,11 +10,13 @@ namespace Entrega_1___PI
     {
         private Dictionary<string, string> _estado;
         private Dictionary<string, int> _quantidade;
+        private Dictionary<string, List<string>> _dinosPorCercado;
 
-        public ValidadorCercado(Dictionary<string, string> estado, Dictionary<string, int> quantidade)
+        public ValidadorCercado(Dictionary<string, string> estado, Dictionary<string, int> quantidade, Dictionary<string, List<string>> dinosPorCercado)
         {
             _estado = estado;
             _quantidade = quantidade;
+            _dinosPorCercado = dinosPorCercado;
         }
 
         public bool PodeJogarEm(string cercado, string dinossauro)
@@ -26,8 +28,8 @@ namespace Entrega_1___PI
                     return _estado["FI"] == dinossauro; 
 
                 case "CD": // Campina da Diferença - só espécies diferentes
-                    if (!_estado.ContainsKey("CD")) return true; 
-                    return _estado["CD"] != dinossauro; 
+                    if (!_dinosPorCercado.ContainsKey("CD")) return true;
+                    return !_dinosPorCercado["CD"].Contains(dinossauro);
 
                 case "IS": // Ilha Solitária - só um dinossauro
                     int qtdIS = _quantidade.ContainsKey("IS") ? _quantidade["IS"] : 0;
