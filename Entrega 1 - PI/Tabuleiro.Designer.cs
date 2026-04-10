@@ -40,14 +40,20 @@
             this.VerificarVezDeJogar = new System.Windows.Forms.Timer(this.components);
             this.btnExibirTabuleiro = new System.Windows.Forms.Button();
             this.txtExibirTabuleiro = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblMao
             // 
             this.lblMao.AutoSize = true;
-            this.lblMao.Location = new System.Drawing.Point(93, 832);
+            this.lblMao.Location = new System.Drawing.Point(19, 63);
             this.lblMao.Name = "lblMao";
             this.lblMao.Size = new System.Drawing.Size(95, 13);
             this.lblMao.TabIndex = 0;
@@ -56,7 +62,7 @@
             // 
             // btnExibirMao
             // 
-            this.btnExibirMao.Location = new System.Drawing.Point(12, 827);
+            this.btnExibirMao.Location = new System.Drawing.Point(12, 19);
             this.btnExibirMao.Name = "btnExibirMao";
             this.btnExibirMao.Size = new System.Drawing.Size(75, 23);
             this.btnExibirMao.TabIndex = 1;
@@ -76,7 +82,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.lstJogadoresNaPartida);
-            this.groupBox1.Location = new System.Drawing.Point(518, 832);
+            this.groupBox1.Location = new System.Drawing.Point(17, 150);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(176, 90);
             this.groupBox1.TabIndex = 3;
@@ -86,19 +92,20 @@
             // lstJogadoresNaPartida
             // 
             this.lstJogadoresNaPartida.FormattingEnabled = true;
-            this.lstJogadoresNaPartida.Location = new System.Drawing.Point(0, 19);
+            this.lstJogadoresNaPartida.Location = new System.Drawing.Point(4, 21);
             this.lstJogadoresNaPartida.Name = "lstJogadoresNaPartida";
-            this.lstJogadoresNaPartida.Size = new System.Drawing.Size(176, 69);
+            this.lstJogadoresNaPartida.Size = new System.Drawing.Size(166, 69);
             this.lstJogadoresNaPartida.TabIndex = 0;
+            this.lstJogadoresNaPartida.SelectedIndexChanged += new System.EventHandler(this.lstJogadoresNaPartida_SelectedIndexChanged);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.lblFaceDado);
             this.groupBox2.Controls.Add(this.lblTurno);
             this.groupBox2.Controls.Add(this.lblJogadorSorteado);
-            this.groupBox2.Location = new System.Drawing.Point(12, 12);
+            this.groupBox2.Location = new System.Drawing.Point(17, 21);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(296, 98);
+            this.groupBox2.Size = new System.Drawing.Size(178, 98);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Informações da Partida";
@@ -128,7 +135,7 @@
             // 
             // btnExibirTabuleiro
             // 
-            this.btnExibirTabuleiro.Location = new System.Drawing.Point(561, 74);
+            this.btnExibirTabuleiro.Location = new System.Drawing.Point(62, 357);
             this.btnExibirTabuleiro.Name = "btnExibirTabuleiro";
             this.btnExibirTabuleiro.Size = new System.Drawing.Size(88, 23);
             this.btnExibirTabuleiro.TabIndex = 5;
@@ -138,7 +145,7 @@
             // 
             // txtExibirTabuleiro
             // 
-            this.txtExibirTabuleiro.Location = new System.Drawing.Point(520, 12);
+            this.txtExibirTabuleiro.Location = new System.Drawing.Point(19, 266);
             this.txtExibirTabuleiro.Multiline = true;
             this.txtExibirTabuleiro.Name = "txtExibirTabuleiro";
             this.txtExibirTabuleiro.ReadOnly = true;
@@ -147,19 +154,50 @@
             this.txtExibirTabuleiro.TabIndex = 6;
             this.txtExibirTabuleiro.TextChanged += new System.EventHandler(this.txtExibirTabuleiro_TextChanged);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.BackgroundImage = global::Entrega_1___PI.Properties.Resources.Tabuleiro_PI;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(290, 11);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(805, 686);
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.btnExibirMao);
+            this.panel1.Controls.Add(this.lblMao);
+            this.panel1.Location = new System.Drawing.Point(12, 13);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(272, 686);
+            this.panel1.TabIndex = 8;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.panel2.Controls.Add(this.btnExibirTabuleiro);
+            this.panel2.Controls.Add(this.txtExibirTabuleiro);
+            this.panel2.Controls.Add(this.groupBox1);
+            this.panel2.Controls.Add(this.groupBox2);
+            this.panel2.Location = new System.Drawing.Point(1101, 11);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(272, 686);
+            this.panel2.TabIndex = 9;
+            // 
             // Tabuleiro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Entrega_1___PI.Properties.Resources.Tabuleiro_PI;
+            this.BackColor = System.Drawing.Color.MidnightBlue;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(706, 940);
-            this.Controls.Add(this.txtExibirTabuleiro);
-            this.Controls.Add(this.btnExibirTabuleiro);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnExibirMao);
-            this.Controls.Add(this.lblMao);
+            this.ClientSize = new System.Drawing.Size(1384, 711);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Tabuleiro";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -168,8 +206,12 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -186,5 +228,8 @@
         private System.Windows.Forms.Timer VerificarVezDeJogar;
         private System.Windows.Forms.Button btnExibirTabuleiro;
         private System.Windows.Forms.TextBox txtExibirTabuleiro;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
     }
 }

@@ -137,6 +137,7 @@
     <Content Include="Imagens\Dinossauros\Tricerátops Amarelo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Imagens\Tabuleiro_PI.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

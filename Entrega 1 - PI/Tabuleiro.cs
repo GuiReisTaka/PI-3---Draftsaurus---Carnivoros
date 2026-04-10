@@ -254,5 +254,15 @@ namespace Entrega_1___PI
             string tabuleiro = Jogo.ExibirTabuleiro(jogadorAtual.Id, jogadorAtual.Senha);
             txtExibirTabuleiro.Text = tabuleiro;
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lstJogadoresNaPartida_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
