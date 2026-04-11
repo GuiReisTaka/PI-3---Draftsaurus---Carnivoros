@@ -101,40 +101,40 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Imagens\Dado\Banheiros.png">
+    <Content Include="Imagens\Dado\Ti.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Imagens\Dado\Cercado Vazio.png">
+    <Content Include="Imagens\Dado\WC.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Imagens\Dado\Floresta.png">
+    <Content Include="Imagens\Dado\VZ.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Imagens\Dado\Pradaria.png">
+    <Content Include="Imagens\Dado\FL.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Imagens\Dado\Praça de Alimentação.png">
+    <Content Include="Imagens\Dado\PR.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Imagens\Dado\T-Rex.png">
+    <Content Include="Imagens\Dado\AL.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Imagens\Dinossauros\Braquiossauro Roxo.png">
+    <Content Include="Imagens\Dinossauros\Br.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Imagens\Dinossauros\Espinossauro Laranja.png">
+    <Content Include="Imagens\Dinossauros\Ep.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Imagens\Dinossauros\Estegossauro Azul.png">
+    <Content Include="Imagens\Dinossauros\Et.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Imagens\Dinossauros\Parasaurolófo Verde.png">
+    <Content Include="Imagens\Dinossauros\Pa.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Imagens\Dinossauros\Tiranossauro Vermelho.png">
+    <Content Include="Imagens\Dinossauros\Ti.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Imagens\Dinossauros\Tricerátops Amarelo.png">
+    <Content Include="Imagens\Dinossauros\Tr.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Imagens\Tabuleiro_PI.jpg" />

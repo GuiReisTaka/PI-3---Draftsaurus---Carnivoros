@@ -76,7 +76,7 @@ namespace Entrega_1___PI
                 }
             }
 
-            VerificarVezDeJogar.Start();
+            //VerificarVezDeJogar.Start();
         }
 
 
@@ -191,6 +191,7 @@ namespace Entrega_1___PI
 
         private void btnExibirMao_Click(object sender, EventArgs e)
         {
+            AtualizarMao();
             lblMao.Text = ("Meus Dinossauros: " + Draft.Jogo.ExibirMao(jogadorAtual.Id, jogadorAtual.Senha));
         }
 
@@ -206,7 +207,7 @@ namespace Entrega_1___PI
             string[] dadosTurno = turno.Split(',');
             lblTurno.Text = "Turno: " + dadosTurno[1];
 
-            string codigoDado = dadosTurno[4];
+            string codigoDado = dadosTurno.Length >= 5 ? dadosTurno[4].Trim() : "";
             string facesRetorno = Jogo.ListarFacesDado();
             facesRetorno = facesRetorno.Replace("\r", "");
             string[] faces = facesRetorno.Split('\n');
@@ -220,6 +221,17 @@ namespace Entrega_1___PI
                 }
             }
 
+            if (!string.IsNullOrEmpty(codigoDado.Trim()))
+            {
+                string caminhoImagem = Application.StartupPath + @"\Imagens\Dado\" + codigoDado.Trim() + ".png";
+                if (System.IO.File.Exists(caminhoImagem))
+                {
+                    picDado.Image = Image.FromFile(caminhoImagem);
+                    picDado.SizeMode = PictureBoxSizeMode.Zoom;
+                }
+            }
+
+
             string retornoJogadores = Jogo.ListarJogadores(IdPartida);
             retornoJogadores = retornoJogadores.Replace("\r", "");
             string[] jogadores = retornoJogadores.Split('\n');
@@ -232,6 +244,13 @@ namespace Entrega_1___PI
                     lblJogadorSorteado.Text = "Jogador Sorteado: " + dadosJogador[1];
                     break;
                 }
+            }
+
+            if (!string.IsNullOrEmpty(codigoDado.Trim()))
+            {
+                string caminhoImagem = Application.StartupPath + @"\Imagens\Dado\" + codigoDado.Trim() + ".png";
+                picDado.Image = Image.FromFile(caminhoImagem);
+                picDado.SizeMode = PictureBoxSizeMode.Zoom;
             }
         }
 
@@ -249,10 +268,46 @@ namespace Entrega_1___PI
 
         }
 
+        private void AtualizarMao()
+        {
+            string mao = Jogo.ExibirMao(jogadorAtual.Id, jogadorAtual.Senha);
+            mao = mao.Replace("\r", "");
+            string[] linhas = mao.Split('\n');
+
+            PictureBox[] picsMao = { picMao1, picMao2, picMao3, picMao4, picMao5, picMao6 };
+
+            // limpa todos primeiro
+            foreach (PictureBox pic in picsMao)
+                pic.Image = null;
+
+            int index = 0;
+            for (int i = 1; i < linhas.Length; i++)
+            {
+                if (linhas[i].Trim() == "") continue;
+                string[] dados = linhas[i].Split(',');
+                string codigoDino = dados[0].Trim();
+                int quantidade = int.Parse(dados[1].Trim());
+
+                for (int q = 0; q < quantidade && index < 6; q++)
+                {
+                    string caminho = Application.StartupPath + @"\Imagens\Dinossauros\" + codigoDino + ".png";
+                    if (System.IO.File.Exists(caminho))
+                    {
+                        picsMao[index].Image = Image.FromFile(caminho);
+                        picsMao[index].SizeMode = PictureBoxSizeMode.Zoom;
+                    }
+                    index++;
+                }
+            }
+        }
+
         private void btnExibirTabuleiro_Click(object sender, EventArgs e)
         {
+
             string tabuleiro = Jogo.ExibirTabuleiro(jogadorAtual.Id, jogadorAtual.Senha);
             txtExibirTabuleiro.Text = tabuleiro;
+          
+            
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -263,6 +318,41 @@ namespace Entrega_1___PI
         private void lstJogadoresNaPartida_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void picMao1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnJogar_Click(object sender, EventArgs e)
+        {
+            string cercado = txtCercado.Text.Trim().ToUpper();
+            string dinossauro = txtDinossauro.Text.Trim();
+
+            if (cercado == "" || dinossauro == "")
+            {
+                MessageBox.Show("Preencha o cercado e o dinossauro!");
+                return;
+            }
+
+            string resultado = Jogo.Jogar(jogadorAtual.Id, jogadorAtual.Senha, dinossauro, cercado);
+
+            if (resultado.StartsWith("ERRO"))
+            {
+                MessageBox.Show(resultado);
+                return;
+            }
+
+            MessageBox.Show("Jogada realizada! Próximo turno: " + resultado);
+            AtualizarInfoTurno();
+            txtCercado.Clear();
+            txtDinossauro.Clear();
+        }
+
+        private void btnAtualizar_Click(object sender, EventArgs e)
+        {
+            AtualizarInfoTurno();
         }
     }
 }
