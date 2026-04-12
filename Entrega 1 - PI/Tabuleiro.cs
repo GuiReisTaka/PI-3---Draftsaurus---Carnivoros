@@ -23,6 +23,31 @@ namespace Entrega_1___PI
             jogadorAtual = jogador;
             jogadorSorteado = JogadorSorteado;
             IdPartida = idPartida;
+
+            //Floresta da Igualdade
+            picTabuleiro.Controls.Add(picFI1); picTabuleiro.Controls.Add(picFI2);
+            picTabuleiro.Controls.Add(picFI3); picTabuleiro.Controls.Add(picFI4);
+            picTabuleiro.Controls.Add(picFI5); picTabuleiro.Controls.Add(picFI6);
+            //Cercado da Diferença
+            picTabuleiro.Controls.Add(picCD1); picTabuleiro.Controls.Add(picCD2);
+            picTabuleiro.Controls.Add(picCD3); picTabuleiro.Controls.Add(picCD4);
+            picTabuleiro.Controls.Add(picCD5); picTabuleiro.Controls.Add(picCD6);
+            //Mata Tripla
+            picTabuleiro.Controls.Add(picMT1); picTabuleiro.Controls.Add(picMT2); picTabuleiro.Controls.Add(picMT3); 
+            //Pradaria do Amor
+            picTabuleiro.Controls.Add(picPA1); picTabuleiro.Controls.Add(picPA2); picTabuleiro.Controls.Add(picPA3);
+            picTabuleiro.Controls.Add(picPA4); picTabuleiro.Controls.Add(picPA5); picTabuleiro.Controls.Add(picPA6);
+            //Ilha Solitaria
+            picTabuleiro.Controls.Add(picIS1);
+            //Rei da Selva
+            picTabuleiro.Controls.Add(picRS1);
+            //Rio
+            picTabuleiro.Controls.Add(picRI1); picTabuleiro.Controls.Add(picRI2); picTabuleiro.Controls.Add(picRI3); picTabuleiro.Controls.Add(picRI4); picTabuleiro.Controls.Add(picRI5);
+            foreach (Control c in picTabuleiro.Controls)
+            {
+                c.Location = new Point(c.Location.X - 290, c.Location.Y - 11);
+            }
+
         }
         private void Tabuleiro_Load(object sender, EventArgs e)
         {
@@ -51,6 +76,8 @@ namespace Entrega_1___PI
 
             string codigoDado = dadosTurno[4];
 
+            lblRodada.Text = "Rodada: 1";
+
             string facesRetorno = Jogo.ListarFacesDado();
             facesRetorno = facesRetorno.Replace("\r", "");
             string[] faces = facesRetorno.Split('\n');
@@ -76,6 +103,21 @@ namespace Entrega_1___PI
                 }
             }
 
+            //Inicializa todas as imagens das peças do tabuleiro e as deixa invisivel
+            PictureBox[] todosPics = {
+                picFI1, picFI2, picFI3, picFI4, picFI5, picFI6,
+                picCD1, picCD2, picCD3, picCD4, picCD5, picCD6,
+                picMT1, picMT2, picMT3,
+                picPA1, picPA2, picPA3, picPA4, picPA5, picPA6,
+                picIS1, picRS1,
+                picRI1, picRI2, picRI3, picRI4, picRI5
+            };
+            foreach (PictureBox pic in todosPics)
+                pic.Visible = false;
+
+            lblNomeMao1.Visible = false; lblNomeMao2.Visible = false; lblNomeMao3.Visible = false;
+            lblNomeMao4.Visible = false; lblNomeMao5.Visible = false; lblNomeMao6.Visible = false;
+
             //VerificarVezDeJogar.Start();
         }
 
@@ -88,6 +130,14 @@ namespace Entrega_1___PI
             string[] dadosTurno = turno.Split(',');
             if (dadosTurno[2] != "A")
                 return;
+
+            int turnoAtual = int.Parse(dadosTurno[1]);
+            int rodada = 0;
+            if (turnoAtual <= 6)
+                rodada = 1;
+            else
+                rodada = 2;
+            lblRodada.Text = "Rodada: " + rodada;
 
             string idJogadorDado = dadosTurno[3];
             string codigoDado = dadosTurno[4].Trim();
@@ -192,7 +242,6 @@ namespace Entrega_1___PI
         private void btnExibirMao_Click(object sender, EventArgs e)
         {
             AtualizarMao();
-            lblMao.Text = ("Meus Dinossauros: " + Draft.Jogo.ExibirMao(jogadorAtual.Id, jogadorAtual.Senha));
         }
 
         private void lblTurno_Click(object sender, EventArgs e)
@@ -206,6 +255,14 @@ namespace Entrega_1___PI
             string turno = Jogo.VerificarPartida(IdPartida);
             string[] dadosTurno = turno.Split(',');
             lblTurno.Text = "Turno: " + dadosTurno[1];
+
+            int turnoAtual = int.Parse(dadosTurno[1]);
+            int rodada = 0;
+            if (turnoAtual <= 6)
+                rodada = 1;
+            else
+                rodada = 2;
+            lblRodada.Text = "Rodada: " + rodada;
 
             string codigoDado = dadosTurno.Length >= 5 ? dadosTurno[4].Trim() : "";
             string facesRetorno = Jogo.ListarFacesDado();
@@ -274,11 +331,27 @@ namespace Entrega_1___PI
             mao = mao.Replace("\r", "");
             string[] linhas = mao.Split('\n');
 
-            PictureBox[] picsMao = { picMao1, picMao2, picMao3, picMao4, picMao5, picMao6 };
+            Dictionary<string, string> nomesDinos = new Dictionary<string, string>()
+            {
+                { "Br", "Braquiossauro" },
+                { "Ep", "Espinossauro" },
+                { "Et", "Estegossauro" },
+                { "Pa", "Parasaurolófo" },
+                { "Ti", "Tiranossauro" },
+                { "Tr", "Tricerátops" }
+            };
 
-            // limpa todos primeiro
+            PictureBox[] picsMao = { picMao1, picMao2, picMao3, picMao4, picMao5, picMao6 };
+            Label[] lblsMao = { lblNomeMao1, lblNomeMao2, lblNomeMao3, lblNomeMao4, lblNomeMao5, lblNomeMao6 };
+
+            // limpa e esconde todos primeiro
             foreach (PictureBox pic in picsMao)
                 pic.Image = null;
+            foreach (Label lbl in lblsMao)
+            {
+                lbl.Visible = false;
+                lbl.Text = "Dinossauro: ";
+            }
 
             int index = 0;
             for (int i = 1; i < linhas.Length; i++)
@@ -296,6 +369,13 @@ namespace Entrega_1___PI
                         picsMao[index].Image = Image.FromFile(caminho);
                         picsMao[index].SizeMode = PictureBoxSizeMode.Zoom;
                     }
+
+                    if (nomesDinos.ContainsKey(codigoDino))
+                    {
+                        lblsMao[index].Text = "Nome: " + nomesDinos[codigoDino] + " (" + codigoDino + ")";
+                        lblsMao[index].Visible = true;
+                    }
+
                     index++;
                 }
             }
@@ -346,6 +426,8 @@ namespace Entrega_1___PI
 
             MessageBox.Show("Jogada realizada! Próximo turno: " + resultado);
             AtualizarInfoTurno();
+            AtualizarTabuleiro();
+            AtualizarMao();
             txtCercado.Clear();
             txtDinossauro.Clear();
         }
@@ -353,6 +435,94 @@ namespace Entrega_1___PI
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
             AtualizarInfoTurno();
+            AtualizarTabuleiro();
+        }
+
+        private void AtualizarTabuleiro()
+        {
+            // Limpa todos os PictureBox do tabuleiro
+            PictureBox[] todosPics = {
+                picFI1, picFI2, picFI3, picFI4, picFI5, picFI6,
+                picCD1, picCD2, picCD3, picCD4, picCD5, picCD6,
+                picMT1, picMT2, picMT3,
+                picPA1, picPA2, picPA3, picPA4, picPA5, picPA6,
+                picIS1, picRS1,
+                picRI1, picRI2, picRI3, picRI4, picRI5
+            };
+            foreach (PictureBox pic in todosPics)
+            {
+                pic.Image = null;
+                pic.Visible = false; // esconde quando vazio
+            }
+
+
+            // Busca o estado do tabuleiro
+            string tabuleiro = Jogo.ExibirTabuleiro(jogadorAtual.Id, jogadorAtual.Senha);
+            if (tabuleiro.StartsWith("ERRO")) return;
+
+            tabuleiro = tabuleiro.Replace("\r", "");
+            string[] linhas = tabuleiro.Split('\n');
+
+            // Contador de quantos dinos já foram colocados em cada cercado
+            Dictionary<string, int> contadores = new Dictionary<string, int>();
+
+            foreach (string linha in linhas)
+            {
+                if (linha.Trim() == "") continue;
+                string[] dados = linha.Split(',');
+                if (dados.Length < 3) continue;
+
+                string cercado = dados[0].Trim();
+                string dino = dados[1].Trim();
+                int quantidade = int.Parse(dados[2].Trim());
+
+                if (!contadores.ContainsKey(cercado))
+                    contadores[cercado] = 0;
+
+                for (int i = 0; i < quantidade; i++)
+                {
+                    PictureBox pic = GetPicturebox(cercado, contadores[cercado]);
+                    if (pic != null)
+                    {
+                        string caminho = Application.StartupPath + @"\Imagens\Dinossauros\" + dino + ".png";
+                        if (System.IO.File.Exists(caminho))
+                        {
+                            pic.Image = Image.FromFile(caminho);
+                            pic.SizeMode = PictureBoxSizeMode.Zoom;
+                            pic.Visible = true;
+                        }
+                    }
+                    contadores[cercado]++;
+                }
+            }
+        }
+
+        private PictureBox GetPicturebox(string cercado, int index)
+        {
+            switch (cercado)
+            {
+                case "FI":
+                    PictureBox[] ficFIs = { picFI1, picFI2, picFI3, picFI4, picFI5, picFI6 };
+                    return index < ficFIs.Length ? ficFIs[index] : null;
+                case "CD":
+                    PictureBox[] picCDs = { picCD1, picCD2, picCD3, picCD4, picCD5, picCD6 };
+                    return index < picCDs.Length ? picCDs[index] : null;
+                case "MT":
+                    PictureBox[] picMTs = { picMT1, picMT2, picMT3 };
+                    return index < picMTs.Length ? picMTs[index] : null;
+                case "PA":
+                    PictureBox[] picPAs = { picPA1, picPA2, picPA3, picPA4, picPA5, picPA6 };
+                    return index < picPAs.Length ? picPAs[index] : null;
+                case "IS":
+                    return index == 0 ? picIS1 : null;
+                case "RS":
+                    return index == 0 ? picRS1 : null;
+                case "RI":
+                    PictureBox[] picRIs = { picRI1, picRI2, picRI3, picRI4, picRI5 };
+                    return index < picRIs.Length ? picRIs[index] : null;
+                default:
+                    return null;
+            }
         }
     }
 }
