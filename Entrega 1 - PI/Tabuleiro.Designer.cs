@@ -34,6 +34,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lstJogadoresNaPartida = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblRodada = new System.Windows.Forms.Label();
             this.picDado = new System.Windows.Forms.PictureBox();
             this.lblFaceDado = new System.Windows.Forms.Label();
             this.lblTurno = new System.Windows.Forms.Label();
@@ -41,6 +42,13 @@
             this.btnExibirTabuleiro = new System.Windows.Forms.Button();
             this.txtExibirTabuleiro = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblNomeMao6 = new System.Windows.Forms.Label();
+            this.lblNomeMao5 = new System.Windows.Forms.Label();
+            this.lblNomeMao4 = new System.Windows.Forms.Label();
+            this.lblNomeMao3 = new System.Windows.Forms.Label();
+            this.lblNomeMao2 = new System.Windows.Forms.Label();
+            this.lblNomeMao1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.picMao6 = new System.Windows.Forms.PictureBox();
             this.picMao1 = new System.Windows.Forms.PictureBox();
             this.picMao4 = new System.Windows.Forms.PictureBox();
@@ -83,14 +91,11 @@
             this.picRI5 = new System.Windows.Forms.PictureBox();
             this.picTabuleiro = new System.Windows.Forms.PictureBox();
             this.picIS1 = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lblRodada = new System.Windows.Forms.Label();
-            this.lblNomeMao1 = new System.Windows.Forms.Label();
-            this.lblNomeMao2 = new System.Windows.Forms.Label();
-            this.lblNomeMao3 = new System.Windows.Forms.Label();
-            this.lblNomeMao4 = new System.Windows.Forms.Label();
-            this.lblNomeMao5 = new System.Windows.Forms.Label();
-            this.lblNomeMao6 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnAtualizarStatus = new System.Windows.Forms.Button();
+            this.dgvJogadorStatus = new System.Windows.Forms.DataGridView();
+            this.Jogador = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDado)).BeginInit();
@@ -131,6 +136,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.picRI5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTabuleiro)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picIS1)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvJogadorStatus)).BeginInit();
             this.SuspendLayout();
             // 
             // btnExibirMao
@@ -184,6 +191,15 @@
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Informações da Partida";
+            // 
+            // lblRodada
+            // 
+            this.lblRodada.AutoSize = true;
+            this.lblRodada.Location = new System.Drawing.Point(6, 20);
+            this.lblRodada.Name = "lblRodada";
+            this.lblRodada.Size = new System.Drawing.Size(48, 13);
+            this.lblRodada.TabIndex = 6;
+            this.lblRodada.Text = "Rodada:";
             // 
             // picDado
             // 
@@ -240,6 +256,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.btnAtualizarStatus);
+            this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.lblNomeMao6);
             this.panel1.Controls.Add(this.lblNomeMao5);
             this.panel1.Controls.Add(this.lblNomeMao4);
@@ -258,6 +276,70 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(272, 688);
             this.panel1.TabIndex = 8;
+            // 
+            // lblNomeMao6
+            // 
+            this.lblNomeMao6.AutoSize = true;
+            this.lblNomeMao6.Location = new System.Drawing.Point(146, 473);
+            this.lblNomeMao6.Name = "lblNomeMao6";
+            this.lblNomeMao6.Size = new System.Drawing.Size(38, 13);
+            this.lblNomeMao6.TabIndex = 14;
+            this.lblNomeMao6.Text = "Nome:";
+            // 
+            // lblNomeMao5
+            // 
+            this.lblNomeMao5.AutoSize = true;
+            this.lblNomeMao5.Location = new System.Drawing.Point(11, 473);
+            this.lblNomeMao5.Name = "lblNomeMao5";
+            this.lblNomeMao5.Size = new System.Drawing.Size(38, 13);
+            this.lblNomeMao5.TabIndex = 13;
+            this.lblNomeMao5.Text = "Nome:";
+            // 
+            // lblNomeMao4
+            // 
+            this.lblNomeMao4.AutoSize = true;
+            this.lblNomeMao4.Location = new System.Drawing.Point(146, 332);
+            this.lblNomeMao4.Name = "lblNomeMao4";
+            this.lblNomeMao4.Size = new System.Drawing.Size(38, 13);
+            this.lblNomeMao4.TabIndex = 12;
+            this.lblNomeMao4.Text = "Nome:";
+            // 
+            // lblNomeMao3
+            // 
+            this.lblNomeMao3.AutoSize = true;
+            this.lblNomeMao3.Location = new System.Drawing.Point(11, 332);
+            this.lblNomeMao3.Name = "lblNomeMao3";
+            this.lblNomeMao3.Size = new System.Drawing.Size(38, 13);
+            this.lblNomeMao3.TabIndex = 11;
+            this.lblNomeMao3.Text = "Nome:";
+            // 
+            // lblNomeMao2
+            // 
+            this.lblNomeMao2.AutoSize = true;
+            this.lblNomeMao2.Location = new System.Drawing.Point(146, 195);
+            this.lblNomeMao2.Name = "lblNomeMao2";
+            this.lblNomeMao2.Size = new System.Drawing.Size(38, 13);
+            this.lblNomeMao2.TabIndex = 10;
+            this.lblNomeMao2.Text = "Nome:";
+            // 
+            // lblNomeMao1
+            // 
+            this.lblNomeMao1.AutoSize = true;
+            this.lblNomeMao1.Location = new System.Drawing.Point(11, 195);
+            this.lblNomeMao1.Name = "lblNomeMao1";
+            this.lblNomeMao1.Size = new System.Drawing.Size(38, 13);
+            this.lblNomeMao1.TabIndex = 9;
+            this.lblNomeMao1.Text = "Nome:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(77, 21);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(116, 25);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Carnívoros";
             // 
             // picMao6
             // 
@@ -532,7 +614,7 @@
             // picPA1
             // 
             this.picPA1.BackColor = System.Drawing.Color.Transparent;
-            this.picPA1.Location = new System.Drawing.Point(384, 487);
+            this.picPA1.Location = new System.Drawing.Point(400, 487);
             this.picPA1.Name = "picPA1";
             this.picPA1.Size = new System.Drawing.Size(50, 50);
             this.picPA1.TabIndex = 27;
@@ -541,7 +623,7 @@
             // picPA2
             // 
             this.picPA2.BackColor = System.Drawing.Color.Transparent;
-            this.picPA2.Location = new System.Drawing.Point(452, 487);
+            this.picPA2.Location = new System.Drawing.Point(467, 487);
             this.picPA2.Name = "picPA2";
             this.picPA2.Size = new System.Drawing.Size(50, 50);
             this.picPA2.TabIndex = 28;
@@ -550,7 +632,7 @@
             // picPA3
             // 
             this.picPA3.BackColor = System.Drawing.Color.Transparent;
-            this.picPA3.Location = new System.Drawing.Point(523, 487);
+            this.picPA3.Location = new System.Drawing.Point(533, 487);
             this.picPA3.Name = "picPA3";
             this.picPA3.Size = new System.Drawing.Size(50, 50);
             this.picPA3.TabIndex = 29;
@@ -559,7 +641,7 @@
             // picPA4
             // 
             this.picPA4.BackColor = System.Drawing.Color.Transparent;
-            this.picPA4.Location = new System.Drawing.Point(363, 543);
+            this.picPA4.Location = new System.Drawing.Point(373, 542);
             this.picPA4.Name = "picPA4";
             this.picPA4.Size = new System.Drawing.Size(50, 50);
             this.picPA4.TabIndex = 30;
@@ -568,7 +650,7 @@
             // picPA5
             // 
             this.picPA5.BackColor = System.Drawing.Color.Transparent;
-            this.picPA5.Location = new System.Drawing.Point(429, 543);
+            this.picPA5.Location = new System.Drawing.Point(440, 543);
             this.picPA5.Name = "picPA5";
             this.picPA5.Size = new System.Drawing.Size(50, 50);
             this.picPA5.TabIndex = 31;
@@ -577,7 +659,7 @@
             // picPA6
             // 
             this.picPA6.BackColor = System.Drawing.Color.Transparent;
-            this.picPA6.Location = new System.Drawing.Point(499, 543);
+            this.picPA6.Location = new System.Drawing.Point(508, 543);
             this.picPA6.Name = "picPA6";
             this.picPA6.Size = new System.Drawing.Size(50, 50);
             this.picPA6.TabIndex = 32;
@@ -650,78 +732,61 @@
             this.picIS1.TabIndex = 40;
             this.picIS1.TabStop = false;
             // 
-            // label3
+            // groupBox3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(77, 21);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(116, 25);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Carnívoros";
+            this.groupBox3.Controls.Add(this.dgvJogadorStatus);
+            this.groupBox3.Location = new System.Drawing.Point(14, 512);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(235, 120);
+            this.groupBox3.TabIndex = 15;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Status dos Jogadores";
             // 
-            // lblRodada
+            // btnAtualizarStatus
             // 
-            this.lblRodada.AutoSize = true;
-            this.lblRodada.Location = new System.Drawing.Point(6, 20);
-            this.lblRodada.Name = "lblRodada";
-            this.lblRodada.Size = new System.Drawing.Size(48, 13);
-            this.lblRodada.TabIndex = 6;
-            this.lblRodada.Text = "Rodada:";
+            this.btnAtualizarStatus.Location = new System.Drawing.Point(75, 638);
+            this.btnAtualizarStatus.Name = "btnAtualizarStatus";
+            this.btnAtualizarStatus.Size = new System.Drawing.Size(118, 31);
+            this.btnAtualizarStatus.TabIndex = 13;
+            this.btnAtualizarStatus.Text = "Atualizar Status";
+            this.btnAtualizarStatus.UseVisualStyleBackColor = true;
+            this.btnAtualizarStatus.Click += new System.EventHandler(this.btnAtualizarStatus_Click);
             // 
-            // lblNomeMao1
+            // dgvJogadorStatus
             // 
-            this.lblNomeMao1.AutoSize = true;
-            this.lblNomeMao1.Location = new System.Drawing.Point(11, 195);
-            this.lblNomeMao1.Name = "lblNomeMao1";
-            this.lblNomeMao1.Size = new System.Drawing.Size(38, 13);
-            this.lblNomeMao1.TabIndex = 9;
-            this.lblNomeMao1.Text = "Nome:";
+            this.dgvJogadorStatus.AllowUserToAddRows = false;
+            this.dgvJogadorStatus.AllowUserToDeleteRows = false;
+            this.dgvJogadorStatus.AllowUserToResizeColumns = false;
+            this.dgvJogadorStatus.AllowUserToResizeRows = false;
+            this.dgvJogadorStatus.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvJogadorStatus.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvJogadorStatus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvJogadorStatus.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Jogador,
+            this.Status});
+            this.dgvJogadorStatus.Location = new System.Drawing.Point(6, 19);
+            this.dgvJogadorStatus.MultiSelect = false;
+            this.dgvJogadorStatus.Name = "dgvJogadorStatus";
+            this.dgvJogadorStatus.ReadOnly = true;
+            this.dgvJogadorStatus.RowHeadersVisible = false;
+            this.dgvJogadorStatus.RowHeadersWidth = 100;
+            this.dgvJogadorStatus.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgvJogadorStatus.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvJogadorStatus.Size = new System.Drawing.Size(223, 95);
+            this.dgvJogadorStatus.TabIndex = 0;
+            this.dgvJogadorStatus.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // lblNomeMao2
+            // Jogador
             // 
-            this.lblNomeMao2.AutoSize = true;
-            this.lblNomeMao2.Location = new System.Drawing.Point(146, 195);
-            this.lblNomeMao2.Name = "lblNomeMao2";
-            this.lblNomeMao2.Size = new System.Drawing.Size(38, 13);
-            this.lblNomeMao2.TabIndex = 10;
-            this.lblNomeMao2.Text = "Nome:";
+            this.Jogador.HeaderText = "Jogador";
+            this.Jogador.Name = "Jogador";
+            this.Jogador.ReadOnly = true;
             // 
-            // lblNomeMao3
+            // Status
             // 
-            this.lblNomeMao3.AutoSize = true;
-            this.lblNomeMao3.Location = new System.Drawing.Point(11, 332);
-            this.lblNomeMao3.Name = "lblNomeMao3";
-            this.lblNomeMao3.Size = new System.Drawing.Size(38, 13);
-            this.lblNomeMao3.TabIndex = 11;
-            this.lblNomeMao3.Text = "Nome:";
-            // 
-            // lblNomeMao4
-            // 
-            this.lblNomeMao4.AutoSize = true;
-            this.lblNomeMao4.Location = new System.Drawing.Point(146, 332);
-            this.lblNomeMao4.Name = "lblNomeMao4";
-            this.lblNomeMao4.Size = new System.Drawing.Size(38, 13);
-            this.lblNomeMao4.TabIndex = 12;
-            this.lblNomeMao4.Text = "Nome:";
-            // 
-            // lblNomeMao5
-            // 
-            this.lblNomeMao5.AutoSize = true;
-            this.lblNomeMao5.Location = new System.Drawing.Point(11, 473);
-            this.lblNomeMao5.Name = "lblNomeMao5";
-            this.lblNomeMao5.Size = new System.Drawing.Size(38, 13);
-            this.lblNomeMao5.TabIndex = 13;
-            this.lblNomeMao5.Text = "Nome:";
-            // 
-            // lblNomeMao6
-            // 
-            this.lblNomeMao6.AutoSize = true;
-            this.lblNomeMao6.Location = new System.Drawing.Point(146, 473);
-            this.lblNomeMao6.Name = "lblNomeMao6";
-            this.lblNomeMao6.Size = new System.Drawing.Size(38, 13);
-            this.lblNomeMao6.TabIndex = 14;
-            this.lblNomeMao6.Text = "Nome:";
+            this.Status.HeaderText = "Status";
+            this.Status.Name = "Status";
+            this.Status.ReadOnly = true;
             // 
             // Tabuleiro
             // 
@@ -809,6 +874,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.picRI5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTabuleiro)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picIS1)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvJogadorStatus)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -876,5 +943,10 @@
         private System.Windows.Forms.Label lblNomeMao3;
         private System.Windows.Forms.Label lblNomeMao2;
         private System.Windows.Forms.Label lblNomeMao1;
+        private System.Windows.Forms.Button btnAtualizarStatus;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.DataGridView dgvJogadorStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Jogador;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
     }
 }

@@ -118,6 +118,8 @@ namespace Entrega_1___PI
             lblNomeMao1.Visible = false; lblNomeMao2.Visible = false; lblNomeMao3.Visible = false;
             lblNomeMao4.Visible = false; lblNomeMao5.Visible = false; lblNomeMao6.Visible = false;
 
+            ConfigurarGrid();
+            AtualizarGridJogadores();
             //VerificarVezDeJogar.Start();
         }
 
@@ -309,6 +311,7 @@ namespace Entrega_1___PI
                 picDado.Image = Image.FromFile(caminhoImagem);
                 picDado.SizeMode = PictureBoxSizeMode.Zoom;
             }
+            AtualizarGridJogadores();
         }
 
 
@@ -428,6 +431,7 @@ namespace Entrega_1___PI
             AtualizarInfoTurno();
             AtualizarTabuleiro();
             AtualizarMao();
+            AtualizarGridJogadores();
             txtCercado.Clear();
             txtDinossauro.Clear();
         }
@@ -522,6 +526,73 @@ namespace Entrega_1___PI
                     return index < picRIs.Length ? picRIs[index] : null;
                 default:
                     return null;
+            }
+        }
+
+        private void ConfigurarGrid()
+        {
+            dgvJogadorStatus.EnableHeadersVisualStyles = false;
+
+            dgvJogadorStatus.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240);
+
+            dgvJogadorStatus.DefaultCellStyle.SelectionBackColor = dgvJogadorStatus.DefaultCellStyle.BackColor;
+            dgvJogadorStatus.DefaultCellStyle.SelectionForeColor = dgvJogadorStatus.DefaultCellStyle.ForeColor;
+
+            dgvJogadorStatus.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvJogadorStatus.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            dgvJogadorStatus.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnAtualizarStatus_Click(object sender, EventArgs e)
+        {
+            AtualizarGridJogadores();
+        }
+
+        private void AtualizarGridJogadores()
+        {
+            dgvJogadorStatus.Rows.Clear();
+
+            string retorno = Jogo.ListarJogadores(IdPartida);
+            if (retorno.StartsWith("ERRO")) return;
+
+            retorno = retorno.Replace("\r", "");
+            string[] jogadores = retorno.Split('\n');
+
+            string turnoDetalhado = Jogo.VerificarTurno(IdPartida);
+            turnoDetalhado = turnoDetalhado.Replace("\r", "");
+            string[] linhasTurno = turnoDetalhado.Split('\n');
+
+            HashSet<string> jogadoresQueJaJogaram = new HashSet<string>();
+
+            for (int i = 1; i < linhasTurno.Length; i++)
+            {
+                string[] dados = linhasTurno[i].Split(',');
+                jogadoresQueJaJogaram.Add(dados[0].Trim());
+            }
+
+            foreach (string jogador in jogadores)
+            {
+                if (jogador.Trim() == "") continue;
+
+                string[] dados = jogador.Split(',');
+                string id = dados[0];
+                string nome = dados[1];
+
+                bool jogou = jogadoresQueJaJogaram.Contains(id);
+
+                string status = jogou ? "✔ Jogou" : "⏳ Aguardando";
+
+                int rowIndex = dgvJogadorStatus.Rows.Add(nome, status);
+
+                if (jogou)
+                {
+                    dgvJogadorStatus.Rows[rowIndex].Cells[1].Style.ForeColor = Color.Green;
+                }
             }
         }
     }
