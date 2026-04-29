@@ -52,7 +52,10 @@ namespace Entrega_1___PI
         private void Tabuleiro_Load(object sender, EventArgs e)
         {
             string[] dadosSorteado = jogadorSorteado.Split(',');
-            lblJogadorSorteado.Text = "Jogador Sorteado: " + dadosSorteado[1];
+            if (dadosSorteado.Length >= 2)
+                lblJogadorSorteado.Text = "Jogador Sorteado: " + dadosSorteado[1];
+            else
+                lblJogadorSorteado.Text = "Jogador Sorteado: " + jogadorSorteado;
 
             string retorno = Jogo.ListarJogadores(IdPartida);
             if (retorno.StartsWith("ERRO"))
@@ -63,12 +66,6 @@ namespace Entrega_1___PI
 
             retorno = retorno.Replace("\r", "");
             string[] jogadores = retorno.Split('\n');
-
-            lstJogadoresNaPartida.Items.Clear();
-            for (int i = 0; i < jogadores.Length - 1; i++)
-            {
-                lstJogadoresNaPartida.Items.Add(jogadores[i]);
-            }
 
             string turno = Jogo.VerificarPartida(IdPartida);
             string[] dadosTurno = turno.Split(',');
@@ -120,7 +117,7 @@ namespace Entrega_1___PI
 
             ConfigurarGrid();
             AtualizarGridJogadores();
-            //VerificarVezDeJogar.Start();
+            VerificarVezDeJogar.Start();
         }
 
 
@@ -233,7 +230,9 @@ namespace Entrega_1___PI
             }
 
             string resultado = Jogo.Jogar(jogadorAtual.Id, jogadorAtual.Senha, dinossauroEscolhido, cercadoEscolhido);
-            MessageBox.Show("Jogada realizada! O dinossauro: " + dinossauroEscolhido + " foi colocado no cercado: " + cercadoEscolhido);
+            AtualizarTabuleiro();
+            AtualizarMao();
+           
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -319,8 +318,59 @@ namespace Entrega_1___PI
         {
             VerificarVezDeJogar.Stop();
             AtualizarInfoTurno();
+
+            string turno = Jogo.VerificarPartida(IdPartida);
+            string[] dadosTurno = turno.Split(',');
+            if (dadosTurno[2] == "F") // partida finalizada
+            {
+                ExibirResultadoFinal();
+                return; // não reinicia o timer
+            }
+
             RealizarJogada();
             VerificarVezDeJogar.Start();
+        }
+
+        private void ExibirResultadoFinal()
+        {
+            //Busca os jogadores da partida
+            string retornoJogadores = Jogo.ListarJogadores(IdPartida);
+            retornoJogadores = retornoJogadores.Replace("\r", "");
+            string[] jogadores = retornoJogadores.Split('\n');
+
+            //Prepara o começo da exibição do resultado
+            StringBuilder resultado = new StringBuilder();
+            resultado.AppendLine(" Fim de Jogo! ");
+            resultado.AppendLine();
+
+            //Busca a pontuação de cada jogador 
+            foreach (string jogador in jogadores)
+            {
+                if (jogador.Trim() == "") continue;
+                string[] dados = jogador.Split(',');
+                int idJogador = int.Parse(dados[0].Trim());
+                string nomeJogador = dados[1].Trim();
+
+                string pontuacao = Jogo.ListarPontuacao(idJogador);
+                string[] linhasPontuacao = pontuacao.Replace("\r", "").Split('\n');
+
+                string pontosFinal = "";
+                foreach (string linha in linhasPontuacao)
+                {
+                    if (linha.Trim().StartsWith("Jogador"))
+                    {
+                        string[] partesLinha = linha.Trim().Split(':');
+                        if (partesLinha.Length >= 2)
+                            pontosFinal = partesLinha[1].Trim();
+                        break;
+                    }
+                }
+
+                resultado.AppendLine($" {nomeJogador}: {pontosFinal} pontos");
+            }
+
+            MessageBox.Show(resultado.ToString(), "Resultado Final");
+            this.Close();
         }
 
         private void txtExibirTabuleiro_TextChanged(object sender, EventArgs e)

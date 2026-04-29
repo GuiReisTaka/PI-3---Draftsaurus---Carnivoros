@@ -31,8 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.btnExibirMao = new System.Windows.Forms.Button();
             this.lblJogadorSorteado = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lstJogadoresNaPartida = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblRodada = new System.Windows.Forms.Label();
             this.picDado = new System.Windows.Forms.PictureBox();
@@ -42,6 +40,11 @@
             this.btnExibirTabuleiro = new System.Windows.Forms.Button();
             this.txtExibirTabuleiro = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnAtualizarStatus = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.dgvJogadorStatus = new System.Windows.Forms.DataGridView();
+            this.Jogador = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblNomeMao6 = new System.Windows.Forms.Label();
             this.lblNomeMao5 = new System.Windows.Forms.Label();
             this.lblNomeMao4 = new System.Windows.Forms.Label();
@@ -91,15 +94,11 @@
             this.picRI5 = new System.Windows.Forms.PictureBox();
             this.picTabuleiro = new System.Windows.Forms.PictureBox();
             this.picIS1 = new System.Windows.Forms.PictureBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnAtualizarStatus = new System.Windows.Forms.Button();
-            this.dgvJogadorStatus = new System.Windows.Forms.DataGridView();
-            this.Jogador = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDado)).BeginInit();
             this.panel1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvJogadorStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMao6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMao1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMao4)).BeginInit();
@@ -136,8 +135,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picRI5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTabuleiro)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picIS1)).BeginInit();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvJogadorStatus)).BeginInit();
             this.SuspendLayout();
             // 
             // btnExibirMao
@@ -158,25 +155,6 @@
             this.lblJogadorSorteado.Size = new System.Drawing.Size(94, 13);
             this.lblJogadorSorteado.TabIndex = 2;
             this.lblJogadorSorteado.Text = "Jogador Sorteado:";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.lstJogadoresNaPartida);
-            this.groupBox1.Location = new System.Drawing.Point(17, 330);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(237, 90);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Lista de jogadores";
-            // 
-            // lstJogadoresNaPartida
-            // 
-            this.lstJogadoresNaPartida.FormattingEnabled = true;
-            this.lstJogadoresNaPartida.Location = new System.Drawing.Point(4, 21);
-            this.lstJogadoresNaPartida.Name = "lstJogadoresNaPartida";
-            this.lstJogadoresNaPartida.Size = new System.Drawing.Size(233, 69);
-            this.lstJogadoresNaPartida.TabIndex = 0;
-            this.lstJogadoresNaPartida.SelectedIndexChanged += new System.EventHandler(this.lstJogadoresNaPartida_SelectedIndexChanged);
             // 
             // groupBox2
             // 
@@ -230,11 +208,12 @@
             // 
             // VerificarVezDeJogar
             // 
+            this.VerificarVezDeJogar.Interval = 2000;
             this.VerificarVezDeJogar.Tick += new System.EventHandler(this.VerificarVezDeJogar_Tick);
             // 
             // btnExibirTabuleiro
             // 
-            this.btnExibirTabuleiro.Location = new System.Drawing.Point(89, 503);
+            this.btnExibirTabuleiro.Location = new System.Drawing.Point(89, 427);
             this.btnExibirTabuleiro.Name = "btnExibirTabuleiro";
             this.btnExibirTabuleiro.Size = new System.Drawing.Size(88, 33);
             this.btnExibirTabuleiro.TabIndex = 5;
@@ -244,12 +223,12 @@
             // 
             // txtExibirTabuleiro
             // 
-            this.txtExibirTabuleiro.Location = new System.Drawing.Point(21, 440);
+            this.txtExibirTabuleiro.Location = new System.Drawing.Point(17, 310);
             this.txtExibirTabuleiro.Multiline = true;
             this.txtExibirTabuleiro.Name = "txtExibirTabuleiro";
             this.txtExibirTabuleiro.ReadOnly = true;
             this.txtExibirTabuleiro.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtExibirTabuleiro.Size = new System.Drawing.Size(233, 57);
+            this.txtExibirTabuleiro.Size = new System.Drawing.Size(237, 111);
             this.txtExibirTabuleiro.TabIndex = 6;
             this.txtExibirTabuleiro.TextChanged += new System.EventHandler(this.txtExibirTabuleiro_TextChanged);
             // 
@@ -276,6 +255,62 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(272, 688);
             this.panel1.TabIndex = 8;
+            // 
+            // btnAtualizarStatus
+            // 
+            this.btnAtualizarStatus.Location = new System.Drawing.Point(75, 638);
+            this.btnAtualizarStatus.Name = "btnAtualizarStatus";
+            this.btnAtualizarStatus.Size = new System.Drawing.Size(118, 31);
+            this.btnAtualizarStatus.TabIndex = 13;
+            this.btnAtualizarStatus.Text = "Atualizar Status";
+            this.btnAtualizarStatus.UseVisualStyleBackColor = true;
+            this.btnAtualizarStatus.Click += new System.EventHandler(this.btnAtualizarStatus_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.dgvJogadorStatus);
+            this.groupBox3.Location = new System.Drawing.Point(14, 512);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(235, 120);
+            this.groupBox3.TabIndex = 15;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Status dos Jogadores";
+            // 
+            // dgvJogadorStatus
+            // 
+            this.dgvJogadorStatus.AllowUserToAddRows = false;
+            this.dgvJogadorStatus.AllowUserToDeleteRows = false;
+            this.dgvJogadorStatus.AllowUserToResizeColumns = false;
+            this.dgvJogadorStatus.AllowUserToResizeRows = false;
+            this.dgvJogadorStatus.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvJogadorStatus.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvJogadorStatus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvJogadorStatus.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Jogador,
+            this.Status});
+            this.dgvJogadorStatus.Location = new System.Drawing.Point(6, 19);
+            this.dgvJogadorStatus.MultiSelect = false;
+            this.dgvJogadorStatus.Name = "dgvJogadorStatus";
+            this.dgvJogadorStatus.ReadOnly = true;
+            this.dgvJogadorStatus.RowHeadersVisible = false;
+            this.dgvJogadorStatus.RowHeadersWidth = 100;
+            this.dgvJogadorStatus.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgvJogadorStatus.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvJogadorStatus.Size = new System.Drawing.Size(223, 95);
+            this.dgvJogadorStatus.TabIndex = 0;
+            this.dgvJogadorStatus.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // Jogador
+            // 
+            this.Jogador.HeaderText = "Jogador";
+            this.Jogador.Name = "Jogador";
+            this.Jogador.ReadOnly = true;
+            // 
+            // Status
+            // 
+            this.Status.HeaderText = "Status";
+            this.Status.Name = "Status";
+            this.Status.ReadOnly = true;
             // 
             // lblNomeMao6
             // 
@@ -408,7 +443,6 @@
             this.panel2.Controls.Add(this.txtDinossauro);
             this.panel2.Controls.Add(this.btnExibirTabuleiro);
             this.panel2.Controls.Add(this.txtExibirTabuleiro);
-            this.panel2.Controls.Add(this.groupBox1);
             this.panel2.Controls.Add(this.groupBox2);
             this.panel2.Location = new System.Drawing.Point(1101, 11);
             this.panel2.Name = "panel2";
@@ -419,7 +453,7 @@
             // 
             this.btnAtualizar.Location = new System.Drawing.Point(61, 261);
             this.btnAtualizar.Name = "btnAtualizar";
-            this.btnAtualizar.Size = new System.Drawing.Size(141, 30);
+            this.btnAtualizar.Size = new System.Drawing.Size(141, 33);
             this.btnAtualizar.TabIndex = 12;
             this.btnAtualizar.Text = "Atualizar Informações";
             this.btnAtualizar.UseVisualStyleBackColor = true;
@@ -732,62 +766,6 @@
             this.picIS1.TabIndex = 40;
             this.picIS1.TabStop = false;
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.dgvJogadorStatus);
-            this.groupBox3.Location = new System.Drawing.Point(14, 512);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(235, 120);
-            this.groupBox3.TabIndex = 15;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Status dos Jogadores";
-            // 
-            // btnAtualizarStatus
-            // 
-            this.btnAtualizarStatus.Location = new System.Drawing.Point(75, 638);
-            this.btnAtualizarStatus.Name = "btnAtualizarStatus";
-            this.btnAtualizarStatus.Size = new System.Drawing.Size(118, 31);
-            this.btnAtualizarStatus.TabIndex = 13;
-            this.btnAtualizarStatus.Text = "Atualizar Status";
-            this.btnAtualizarStatus.UseVisualStyleBackColor = true;
-            this.btnAtualizarStatus.Click += new System.EventHandler(this.btnAtualizarStatus_Click);
-            // 
-            // dgvJogadorStatus
-            // 
-            this.dgvJogadorStatus.AllowUserToAddRows = false;
-            this.dgvJogadorStatus.AllowUserToDeleteRows = false;
-            this.dgvJogadorStatus.AllowUserToResizeColumns = false;
-            this.dgvJogadorStatus.AllowUserToResizeRows = false;
-            this.dgvJogadorStatus.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvJogadorStatus.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dgvJogadorStatus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvJogadorStatus.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Jogador,
-            this.Status});
-            this.dgvJogadorStatus.Location = new System.Drawing.Point(6, 19);
-            this.dgvJogadorStatus.MultiSelect = false;
-            this.dgvJogadorStatus.Name = "dgvJogadorStatus";
-            this.dgvJogadorStatus.ReadOnly = true;
-            this.dgvJogadorStatus.RowHeadersVisible = false;
-            this.dgvJogadorStatus.RowHeadersWidth = 100;
-            this.dgvJogadorStatus.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvJogadorStatus.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvJogadorStatus.Size = new System.Drawing.Size(223, 95);
-            this.dgvJogadorStatus.TabIndex = 0;
-            this.dgvJogadorStatus.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // Jogador
-            // 
-            this.Jogador.HeaderText = "Jogador";
-            this.Jogador.Name = "Jogador";
-            this.Jogador.ReadOnly = true;
-            // 
-            // Status
-            // 
-            this.Status.HeaderText = "Status";
-            this.Status.Name = "Status";
-            this.Status.ReadOnly = true;
-            // 
             // Tabuleiro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -831,12 +809,13 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tabuleiro";
             this.Load += new System.EventHandler(this.Tabuleiro_Load);
-            this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDado)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvJogadorStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMao6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMao1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMao4)).EndInit();
@@ -874,8 +853,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picRI5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTabuleiro)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picIS1)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvJogadorStatus)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -883,8 +860,6 @@
         #endregion
         private System.Windows.Forms.Button btnExibirMao;
         private System.Windows.Forms.Label lblJogadorSorteado;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListBox lstJogadoresNaPartida;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label lblTurno;
         private System.Windows.Forms.Label lblFaceDado;
