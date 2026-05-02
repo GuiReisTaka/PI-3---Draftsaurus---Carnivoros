@@ -148,7 +148,9 @@ namespace Entrega_1___PI
             bool jaJogou = false;
             for (int i = 1; i < linhasTurno.Length; i++)
             {
+                if (linhasTurno[i].Trim() == "") continue;
                 string[] dadosJogada = linhasTurno[i].Split(',');
+                if (dadosJogada.Length == 0) continue;
                 if (dadosJogada[0].Trim() == jogadorAtual.Id.ToString())
                 {
                     jaJogou = true;
@@ -311,11 +313,17 @@ namespace Entrega_1___PI
                 picDado.SizeMode = PictureBoxSizeMode.Zoom;
             }
             AtualizarGridJogadores();
+
+            //Exibe de maneira textual a situação do tabuleiro 
+            string tabuleiro = Jogo.ExibirTabuleiro(jogadorAtual.Id, jogadorAtual.Senha);
+            txtExibirTabuleiro.Text = tabuleiro;
         }
 
 
         private void VerificarVezDeJogar_Tick(object sender, EventArgs e)
         {
+            string debug = Jogo.VerificarPartida(IdPartida);
+            txtExibirTabuleiro.Text = debug;
             VerificarVezDeJogar.Stop();
             AtualizarInfoTurno();
 
@@ -460,30 +468,7 @@ namespace Entrega_1___PI
 
         private void btnJogar_Click(object sender, EventArgs e)
         {
-            string cercado = txtCercado.Text.Trim().ToUpper();
-            string dinossauro = txtDinossauro.Text.Trim();
-
-            if (cercado == "" || dinossauro == "")
-            {
-                MessageBox.Show("Preencha o cercado e o dinossauro!");
-                return;
-            }
-
-            string resultado = Jogo.Jogar(jogadorAtual.Id, jogadorAtual.Senha, dinossauro, cercado);
-
-            if (resultado.StartsWith("ERRO"))
-            {
-                MessageBox.Show(resultado);
-                return;
-            }
-
-            MessageBox.Show("Jogada realizada! Próximo turno: " + resultado);
-            AtualizarInfoTurno();
-            AtualizarTabuleiro();
-            AtualizarMao();
-            AtualizarGridJogadores();
-            txtCercado.Clear();
-            txtDinossauro.Clear();
+           
         }
 
         private void btnAtualizar_Click(object sender, EventArgs e)
@@ -644,6 +629,11 @@ namespace Entrega_1___PI
                     dgvJogadorStatus.Rows[rowIndex].Cells[1].Style.ForeColor = Color.Green;
                 }
             }
+        }
+
+        private void txtDinossauro_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

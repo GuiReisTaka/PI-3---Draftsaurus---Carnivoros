@@ -60,11 +60,6 @@
             this.picMao2 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnAtualizar = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnJogar = new System.Windows.Forms.Button();
-            this.txtCercado = new System.Windows.Forms.TextBox();
-            this.txtDinossauro = new System.Windows.Forms.TextBox();
             this.picFI1 = new System.Windows.Forms.PictureBox();
             this.picFI2 = new System.Windows.Forms.PictureBox();
             this.picFI3 = new System.Windows.Forms.PictureBox();
@@ -139,9 +134,9 @@
             // 
             // btnExibirMao
             // 
-            this.btnExibirMao.Location = new System.Drawing.Point(98, 56);
+            this.btnExibirMao.Location = new System.Drawing.Point(61, 49);
             this.btnExibirMao.Name = "btnExibirMao";
-            this.btnExibirMao.Size = new System.Drawing.Size(75, 23);
+            this.btnExibirMao.Size = new System.Drawing.Size(141, 33);
             this.btnExibirMao.TabIndex = 1;
             this.btnExibirMao.Text = "Exibir Mão";
             this.btnExibirMao.UseVisualStyleBackColor = true;
@@ -213,9 +208,9 @@
             // 
             // btnExibirTabuleiro
             // 
-            this.btnExibirTabuleiro.Location = new System.Drawing.Point(89, 427);
+            this.btnExibirTabuleiro.Location = new System.Drawing.Point(61, 473);
             this.btnExibirTabuleiro.Name = "btnExibirTabuleiro";
-            this.btnExibirTabuleiro.Size = new System.Drawing.Size(88, 33);
+            this.btnExibirTabuleiro.Size = new System.Drawing.Size(141, 33);
             this.btnExibirTabuleiro.TabIndex = 5;
             this.btnExibirTabuleiro.Text = "ExibirTabuleiro";
             this.btnExibirTabuleiro.UseVisualStyleBackColor = true;
@@ -223,12 +218,12 @@
             // 
             // txtExibirTabuleiro
             // 
-            this.txtExibirTabuleiro.Location = new System.Drawing.Point(17, 310);
+            this.txtExibirTabuleiro.Location = new System.Drawing.Point(17, 332);
             this.txtExibirTabuleiro.Multiline = true;
             this.txtExibirTabuleiro.Name = "txtExibirTabuleiro";
             this.txtExibirTabuleiro.ReadOnly = true;
             this.txtExibirTabuleiro.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtExibirTabuleiro.Size = new System.Drawing.Size(237, 111);
+            this.txtExibirTabuleiro.Size = new System.Drawing.Size(237, 129);
             this.txtExibirTabuleiro.TabIndex = 6;
             this.txtExibirTabuleiro.TextChanged += new System.EventHandler(this.txtExibirTabuleiro_TextChanged);
             // 
@@ -239,6 +234,7 @@
             this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.lblNomeMao6);
             this.panel1.Controls.Add(this.lblNomeMao5);
+            this.panel1.Controls.Add(this.btnExibirMao);
             this.panel1.Controls.Add(this.lblNomeMao4);
             this.panel1.Controls.Add(this.lblNomeMao3);
             this.panel1.Controls.Add(this.lblNomeMao2);
@@ -250,7 +246,6 @@
             this.panel1.Controls.Add(this.picMao5);
             this.panel1.Controls.Add(this.picMao3);
             this.panel1.Controls.Add(this.picMao2);
-            this.panel1.Controls.Add(this.btnExibirMao);
             this.panel1.Location = new System.Drawing.Point(12, 11);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(272, 688);
@@ -258,9 +253,9 @@
             // 
             // btnAtualizarStatus
             // 
-            this.btnAtualizarStatus.Location = new System.Drawing.Point(75, 638);
+            this.btnAtualizarStatus.Location = new System.Drawing.Point(61, 638);
             this.btnAtualizarStatus.Name = "btnAtualizarStatus";
-            this.btnAtualizarStatus.Size = new System.Drawing.Size(118, 31);
+            this.btnAtualizarStatus.Size = new System.Drawing.Size(141, 31);
             this.btnAtualizarStatus.TabIndex = 13;
             this.btnAtualizarStatus.Text = "Atualizar Status";
             this.btnAtualizarStatus.UseVisualStyleBackColor = true;
@@ -283,7 +278,7 @@
             this.dgvJogadorStatus.AllowUserToResizeColumns = false;
             this.dgvJogadorStatus.AllowUserToResizeRows = false;
             this.dgvJogadorStatus.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvJogadorStatus.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvJogadorStatus.BackgroundColor = System.Drawing.Color.White;
             this.dgvJogadorStatus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvJogadorStatus.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Jogador,
@@ -369,10 +364,10 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(77, 21);
+            this.label3.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(67, 10);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(116, 25);
+            this.label3.Size = new System.Drawing.Size(126, 25);
             this.label3.TabIndex = 8;
             this.label3.Text = "Carnívoros";
             // 
@@ -436,11 +431,6 @@
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Control;
             this.panel2.Controls.Add(this.btnAtualizar);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.btnJogar);
-            this.panel2.Controls.Add(this.txtCercado);
-            this.panel2.Controls.Add(this.txtDinossauro);
             this.panel2.Controls.Add(this.btnExibirTabuleiro);
             this.panel2.Controls.Add(this.txtExibirTabuleiro);
             this.panel2.Controls.Add(this.groupBox2);
@@ -451,55 +441,13 @@
             // 
             // btnAtualizar
             // 
-            this.btnAtualizar.Location = new System.Drawing.Point(61, 261);
+            this.btnAtualizar.Location = new System.Drawing.Point(61, 271);
             this.btnAtualizar.Name = "btnAtualizar";
             this.btnAtualizar.Size = new System.Drawing.Size(141, 33);
             this.btnAtualizar.TabIndex = 12;
             this.btnAtualizar.Text = "Atualizar Informações";
             this.btnAtualizar.UseVisualStyleBackColor = true;
             this.btnAtualizar.Click += new System.EventHandler(this.btnAtualizar_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(183, 578);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 13);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Cercado";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(41, 578);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 13);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Dinossauro";
-            // 
-            // btnJogar
-            // 
-            this.btnJogar.Location = new System.Drawing.Point(89, 638);
-            this.btnJogar.Name = "btnJogar";
-            this.btnJogar.Size = new System.Drawing.Size(88, 31);
-            this.btnJogar.TabIndex = 9;
-            this.btnJogar.Text = "Jogada";
-            this.btnJogar.UseVisualStyleBackColor = true;
-            this.btnJogar.Click += new System.EventHandler(this.btnJogar_Click);
-            // 
-            // txtCercado
-            // 
-            this.txtCercado.Location = new System.Drawing.Point(154, 594);
-            this.txtCercado.Name = "txtCercado";
-            this.txtCercado.Size = new System.Drawing.Size(100, 20);
-            this.txtCercado.TabIndex = 8;
-            // 
-            // txtDinossauro
-            // 
-            this.txtDinossauro.Location = new System.Drawing.Point(26, 594);
-            this.txtDinossauro.Name = "txtDinossauro";
-            this.txtDinossauro.Size = new System.Drawing.Size(100, 20);
-            this.txtDinossauro.TabIndex = 7;
             // 
             // picFI1
             // 
@@ -875,12 +823,7 @@
         private System.Windows.Forms.PictureBox picMao5;
         private System.Windows.Forms.PictureBox picMao3;
         private System.Windows.Forms.PictureBox picMao2;
-        private System.Windows.Forms.TextBox txtCercado;
-        private System.Windows.Forms.TextBox txtDinossauro;
-        private System.Windows.Forms.Button btnJogar;
         private System.Windows.Forms.Button btnAtualizar;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox picFI1;
         private System.Windows.Forms.PictureBox picFI2;
         private System.Windows.Forms.PictureBox picFI3;

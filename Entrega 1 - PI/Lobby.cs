@@ -148,6 +148,7 @@ namespace Entrega_1___PI
             string[] partes = entrar.Split(',');
             lblIdJogador.Text = "ID do Jogador: " + partes[0];
             lblSenhaJogador.Text = "Senha do Jogador: " + partes[1];
+            
         }
 
         private void groupBox3_Enter(object sender, EventArgs e)
@@ -222,6 +223,37 @@ namespace Entrega_1___PI
                 dgvListaPartida.Columns["status"].HeaderText = "Status";
                 dgvListaPartida.Columns["status"].Width = 50;
             }
+
+            // Design
+            dgvListaPartida.BackgroundColor = Color.FromArgb(42, 42, 64);
+            dgvListaPartida.BorderStyle = BorderStyle.None;
+
+            dgvListaPartida.EnableHeadersVisualStyles = false;
+
+            // Cabeçalho
+            dgvListaPartida.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(30, 30, 60);
+            dgvListaPartida.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvListaPartida.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // Linhas
+            dgvListaPartida.DefaultCellStyle.BackColor = Color.FromArgb(42, 42, 64);
+            dgvListaPartida.DefaultCellStyle.ForeColor = Color.White;
+            dgvListaPartida.DefaultCellStyle.SelectionBackColor = Color.FromArgb(58, 134, 255);
+            dgvListaPartida.DefaultCellStyle.SelectionForeColor = Color.White;
+
+            // Linhas alternadas (visual bonito)
+            dgvListaPartida.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(36, 36, 56);
+
+            // Grid
+            dgvListaPartida.GridColor = Color.FromArgb(68, 68, 102);
+
+            dgvListaPartida.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvListaPartida.RowHeadersVisible = false;
+
+            // Fonte (opcional, mas melhora muito)
+            dgvListaPartida.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+            dgvListaPartida.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
         }
 
         private void dgvListaPartida_SelectionChanged(object sender, EventArgs e)
@@ -266,6 +298,9 @@ namespace Entrega_1___PI
                 lstJogadoresDaPartida.Items.Add(jogadores[i]);
         }
 
-        
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
