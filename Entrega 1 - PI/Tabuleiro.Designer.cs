@@ -753,6 +753,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.picTabuleiro);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Tabuleiro";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tabuleiro";
