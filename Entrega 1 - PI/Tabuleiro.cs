@@ -131,14 +131,9 @@ namespace Entrega_1___PI
                 return;
 
             int turnoAtual = int.Parse(dadosTurno[1]);
-            int rodada = 0;
-            if (turnoAtual <= 6)
-                rodada = 1;
-            else
-                rodada = 2;
+            int rodada = turnoAtual <= 6 ? 1 : 2;
             lblRodada.Text = "Rodada: " + rodada;
 
-            string idJogadorDado = dadosTurno[3];
             string codigoDado = dadosTurno[4].Trim();
 
             string turnoDetalhado = Jogo.VerificarTurno(IdPartida);
@@ -159,41 +154,25 @@ namespace Entrega_1___PI
             }
             if (jaJogou) return;
 
-            // Pega o estado do tabuleiro antes de tudo
+            // Pega o estado do tabuleiro
             EstadoTabuleiro estadoTabuleiro = new EstadoTabuleiro(jogadorAtual);
             Dictionary<string, string> estado = estadoTabuleiro.ObterEstado();
-
             Dictionary<string, int> quantidade = estadoTabuleiro.ObterQuantidadePorCercado();
             Dictionary<string, List<string>> dinosPorCercado = estadoTabuleiro.ObterDinosPorCercado();
-            ValidadorCercado validador = new ValidadorCercado(estado, quantidade, dinosPorCercado);
 
-            // Pega o dinossauro da mão
+            // Pega a mão
             string mao = Jogo.ExibirMao(jogadorAtual.Id, jogadorAtual.Senha);
             mao = mao.Replace("\r", "");
             string[] dinossauros = mao.Split('\n');
 
-            string dinossauroEscolhido = "";
-            for (int i = 1; i < dinossauros.Length; i++)
-            {
-                if (dinossauros[i].Trim() != "")
-                {
-                    string[] dadosDino = dinossauros[i].Split(',');
-                    dinossauroEscolhido = dadosDino[0].Trim();
-                    break;
-                }
-            }
-
-            if (dinossauroEscolhido == "")
+            if (dinossauros.Length <= 1)
             {
                 MessageBox.Show("Nenhum dinossauro na mão!");
                 return;
             }
 
-            
-
             // Define cercados válidos baseado no dado
             List<string> cercadosValidos = new List<string>();
-
             if (codigoDado == "AL")
                 cercadosValidos.AddRange(new[] { "FI", "MT", "PA" });
             else if (codigoDado == "WC")
@@ -207,7 +186,6 @@ namespace Entrega_1___PI
                 string[] todosCercados = { "FI", "MT", "PA", "RS", "CD", "IS", "RI" };
                 foreach (string cercado in todosCercados)
                 {
-                    // Verifica se há T-Rex entre TODOS os dinos do cercado
                     bool temTRex = dinosPorCercado.ContainsKey(cercado) &&
                                    dinosPorCercado[cercado].Contains("Ti");
                     if (!temTRex)
@@ -226,23 +204,17 @@ namespace Entrega_1___PI
             else
                 cercadosValidos.AddRange(new[] { "FI", "MT", "PA", "RS", "CD", "IS", "RI" });
 
+            // Escolhe a melhor jogada
+            EstrategiaJogada estrategia = new EstrategiaJogada(estado, quantidade, dinosPorCercado, turnoAtual);
+            var (dinossauroEscolhido, cercadoEscolhido) = estrategia.EscolherMelhorJogada(
+                cercadosValidos, dinossauros);
 
-            string cercadoEscolhido = "";
-            foreach (string cercado in cercadosValidos)
-            {
-                if (validador.PodeJogarEm(cercado, dinossauroEscolhido))
-                {
-                    cercadoEscolhido = cercado;
-                    break;
-                }
-            }
             if (cercadoEscolhido == "")
                 cercadoEscolhido = "RI";
 
             string resultado = Jogo.Jogar(jogadorAtual.Id, jogadorAtual.Senha, dinossauroEscolhido, cercadoEscolhido);
             AtualizarTabuleiro();
             AtualizarMao();
-           
         }
 
         private void label1_Click(object sender, EventArgs e)

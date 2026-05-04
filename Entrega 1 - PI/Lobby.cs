@@ -148,7 +148,22 @@ namespace Entrega_1___PI
             string[] partes = entrar.Split(',');
             lblIdJogador.Text = "ID do Jogador: " + partes[0];
             lblSenhaJogador.Text = "Senha do Jogador: " + partes[1];
-            
+
+            string retorno = Jogo.ListarJogadores(_idPartidaSelecionada);
+            if (retorno.StartsWith("ERRO"))
+            {
+                MessageBox.Show("Erro ao listar jogadores da partida");
+                return;
+            }
+
+            retorno = retorno.Replace("\r", "");
+            string[] jogadores = retorno.Split('\n');
+
+            lstJogadoresDaPartida.Items.Clear();
+
+            for (int i = 0; i < jogadores.Length - 1; i++)
+                lstJogadoresDaPartida.Items.Add(jogadores[i]);
+
         }
 
         private void groupBox3_Enter(object sender, EventArgs e)
