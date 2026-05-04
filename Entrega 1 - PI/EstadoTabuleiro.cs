@@ -11,22 +11,23 @@ namespace Entrega_1___PI
     {
         private Jogador _jogador;
 
+        string tabuleiro;
+
         public EstadoTabuleiro(Jogador jogador)
         {
             _jogador = jogador;
+            tabuleiro = Jogo.ExibirTabuleiro(_jogador.Id, _jogador.Senha);
         }
 
         public Dictionary<string, string> ObterEstado()
         {
             Dictionary<string, string> estado = new Dictionary<string, string>();
 
-            string tabuleiro = Jogo.ExibirTabuleiro(_jogador.Id, _jogador.Senha);
-
             if (tabuleiro.StartsWith("ERRO"))
                 return estado;
 
-            tabuleiro = tabuleiro.Replace("\r", "");
-            string[] linhas = tabuleiro.Split('\n');
+            string tabuleiroLimpo = tabuleiro.Replace("\r", "");
+            string[] linhas = tabuleiroLimpo.Split('\n');
 
             foreach (string linha in linhas)
             {
@@ -44,13 +45,11 @@ namespace Entrega_1___PI
         {
             Dictionary<string, int> quantidade = new Dictionary<string, int>();
 
-            string tabuleiro = Jogo.ExibirTabuleiro(_jogador.Id, _jogador.Senha);
-
             if (tabuleiro.StartsWith("ERRO"))
                 return quantidade;
 
-            tabuleiro = tabuleiro.Replace("\r", "");
-            string[] linhas = tabuleiro.Split('\n');
+            string tabuleiroLimpo = tabuleiro.Replace("\r", "");
+            string[] linhas = tabuleiroLimpo.Split('\n');
 
             foreach (string linha in linhas)
             {
@@ -74,11 +73,10 @@ namespace Entrega_1___PI
         public Dictionary<string, List<string>> ObterDinosPorCercado()
         {
             Dictionary<string, List<string>> dinos = new Dictionary<string, List<string>>();
-            string tabuleiro = Jogo.ExibirTabuleiro(_jogador.Id, _jogador.Senha);
             if (tabuleiro.StartsWith("ERRO"))
                 return dinos;
-            tabuleiro = tabuleiro.Replace("\r", "");
-            string[] linhas = tabuleiro.Split('\n');
+            string tabuleiroLimpo = tabuleiro.Replace("\r", "");
+            string[] linhas = tabuleiroLimpo.Split('\n');
             foreach (string linha in linhas)
             {
                 if (linha.Trim() == "") continue;

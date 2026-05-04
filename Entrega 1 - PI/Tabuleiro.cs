@@ -163,6 +163,10 @@ namespace Entrega_1___PI
             EstadoTabuleiro estadoTabuleiro = new EstadoTabuleiro(jogadorAtual);
             Dictionary<string, string> estado = estadoTabuleiro.ObterEstado();
 
+            Dictionary<string, int> quantidade = estadoTabuleiro.ObterQuantidadePorCercado();
+            Dictionary<string, List<string>> dinosPorCercado = estadoTabuleiro.ObterDinosPorCercado();
+            ValidadorCercado validador = new ValidadorCercado(estado, quantidade, dinosPorCercado);
+
             // Pega o dinossauro da mão
             string mao = Jogo.ExibirMao(jogadorAtual.Id, jogadorAtual.Senha);
             mao = mao.Replace("\r", "");
@@ -185,6 +189,8 @@ namespace Entrega_1___PI
                 return;
             }
 
+            
+
             // Define cercados válidos baseado no dado
             List<string> cercadosValidos = new List<string>();
 
@@ -201,7 +207,10 @@ namespace Entrega_1___PI
                 string[] todosCercados = { "FI", "MT", "PA", "RS", "CD", "IS", "RI" };
                 foreach (string cercado in todosCercados)
                 {
-                    if (!estado.ContainsKey(cercado) || estado[cercado] != "Ti")
+                    // Verifica se há T-Rex entre TODOS os dinos do cercado
+                    bool temTRex = dinosPorCercado.ContainsKey(cercado) &&
+                                   dinosPorCercado[cercado].Contains("Ti");
+                    if (!temTRex)
                         cercadosValidos.Add(cercado);
                 }
             }
@@ -217,11 +226,8 @@ namespace Entrega_1___PI
             else
                 cercadosValidos.AddRange(new[] { "FI", "MT", "PA", "RS", "CD", "IS", "RI" });
 
-            Dictionary<string, int> quantidade = estadoTabuleiro.ObterQuantidadePorCercado();
-            Dictionary<string, List<string>> dinosPorCercado = estadoTabuleiro.ObterDinosPorCercado();
-            ValidadorCercado validador = new ValidadorCercado(estado, quantidade, dinosPorCercado);
-            string cercadoEscolhido = "RI"; // padrão é o Rio se nenhum cercado for válido
 
+            string cercadoEscolhido = "";
             foreach (string cercado in cercadosValidos)
             {
                 if (validador.PodeJogarEm(cercado, dinossauroEscolhido))
@@ -230,6 +236,8 @@ namespace Entrega_1___PI
                     break;
                 }
             }
+            if (cercadoEscolhido == "")
+                cercadoEscolhido = "RI";
 
             string resultado = Jogo.Jogar(jogadorAtual.Id, jogadorAtual.Senha, dinossauroEscolhido, cercadoEscolhido);
             AtualizarTabuleiro();
