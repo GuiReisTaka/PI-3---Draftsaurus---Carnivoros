@@ -83,6 +83,13 @@ namespace Entrega_1___PI
                         int novaQtd = qtdAtual + 1;
                         double pontosImediatos = pontosFI[novaQtd] - (qtdAtual > 0 ? pontosFI[qtdAtual] : 0);
                         double bonus = novaQtd == 6 ? 5 : 0;
+
+                        if (qtdAtual == 0 && mao.ContainsKey(dino) && mao[dino] == 1)
+                            return pontosImediatos - 3;
+
+                        if (qtdAtual > 0 && mao.ContainsKey(dino))
+                            bonus += mao[dino] * 1.5; 
+
                         return pontosImediatos + bonus;
                     }
                 case "CD":
@@ -92,6 +99,11 @@ namespace Entrega_1___PI
                         int novaQtd = qtdAtual + 1;
                         double pontosImediatos = pontosCD[novaQtd] - (qtdAtual > 0 ? pontosCD[qtdAtual] : 0);
                         double bonus = novaQtd == 6 ? 5 : 0;
+
+                        int espacosRestantes = 6 - novaQtd;
+                        if (qtdAtual > 0 && espacosRestantes > 0)
+                            bonus += 1.5; 
+
                         return pontosImediatos + bonus;
                     }
                 case "MT":
@@ -108,18 +120,37 @@ namespace Entrega_1___PI
                     }
                 case "IS":
                     {
-                        if (turnoAtual <= 6) return -1; // evita na primeira rodada
+
+                        if (turnoAtual != 6 && turnoAtual != 12) return -1;
+
+                        // Verifica se o dinossauro já aparece em algum outro cercado do zoo
                         bool unicoNoZoo = true;
                         foreach (var par in dinosPorCercado)
                         {
                             if (par.Key == "IS") continue;
                             if (par.Value.Contains(dino)) { unicoNoZoo = false; break; }
                         }
-                        return unicoNoZoo ? 7 : 1;
+
+                        // Só vale a pena se for único no zoo
+                        return unicoNoZoo ? 7 : -1;
                     }
                 case "RS":
                     {
-                        return dino == "Ti" ? 6 : 2;
+                        if (turnoAtual <= 6) return -1;
+
+                        // Encontra o dino mais frequente na mão
+                        string dinoMaisFrequente = "";
+                        int maiorQtd = 0;
+                        foreach (var par in mao)
+                        {
+                            if (par.Value > maiorQtd)
+                            {
+                                maiorQtd = par.Value;
+                                dinoMaisFrequente = par.Key;
+                            }
+                        }
+
+                        return dino == dinoMaisFrequente ? 6 : 2;
                     }
                 case "RI":
                     {

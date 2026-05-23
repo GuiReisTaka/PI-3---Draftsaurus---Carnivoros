@@ -134,12 +134,15 @@
             // 
             // btnExibirMao
             // 
-            this.btnExibirMao.Location = new System.Drawing.Point(61, 49);
+            this.btnExibirMao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(86)))), ((int)(((byte)(66)))));
+            this.btnExibirMao.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExibirMao.ForeColor = System.Drawing.Color.White;
+            this.btnExibirMao.Location = new System.Drawing.Point(61, 41);
             this.btnExibirMao.Name = "btnExibirMao";
             this.btnExibirMao.Size = new System.Drawing.Size(141, 33);
             this.btnExibirMao.TabIndex = 1;
             this.btnExibirMao.Text = "Exibir Mão";
-            this.btnExibirMao.UseVisualStyleBackColor = true;
+            this.btnExibirMao.UseVisualStyleBackColor = false;
             this.btnExibirMao.Click += new System.EventHandler(this.btnExibirMao_Click);
             // 
             // lblJogadorSorteado
@@ -208,16 +211,20 @@
             // 
             // btnExibirTabuleiro
             // 
+            this.btnExibirTabuleiro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(86)))), ((int)(((byte)(66)))));
+            this.btnExibirTabuleiro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExibirTabuleiro.ForeColor = System.Drawing.Color.White;
             this.btnExibirTabuleiro.Location = new System.Drawing.Point(61, 473);
             this.btnExibirTabuleiro.Name = "btnExibirTabuleiro";
             this.btnExibirTabuleiro.Size = new System.Drawing.Size(141, 33);
             this.btnExibirTabuleiro.TabIndex = 5;
             this.btnExibirTabuleiro.Text = "ExibirTabuleiro";
-            this.btnExibirTabuleiro.UseVisualStyleBackColor = true;
+            this.btnExibirTabuleiro.UseVisualStyleBackColor = false;
             this.btnExibirTabuleiro.Click += new System.EventHandler(this.btnExibirTabuleiro_Click);
             // 
             // txtExibirTabuleiro
             // 
+            this.txtExibirTabuleiro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(231)))), ((int)(((byte)(220)))));
             this.txtExibirTabuleiro.Location = new System.Drawing.Point(17, 332);
             this.txtExibirTabuleiro.Multiline = true;
             this.txtExibirTabuleiro.Name = "txtExibirTabuleiro";
@@ -229,7 +236,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(231)))), ((int)(((byte)(220)))));
             this.panel1.Controls.Add(this.btnAtualizarStatus);
             this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.lblNomeMao6);
@@ -253,12 +260,15 @@
             // 
             // btnAtualizarStatus
             // 
+            this.btnAtualizarStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(86)))), ((int)(((byte)(66)))));
+            this.btnAtualizarStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAtualizarStatus.ForeColor = System.Drawing.SystemColors.Control;
             this.btnAtualizarStatus.Location = new System.Drawing.Point(61, 638);
             this.btnAtualizarStatus.Name = "btnAtualizarStatus";
             this.btnAtualizarStatus.Size = new System.Drawing.Size(141, 31);
             this.btnAtualizarStatus.TabIndex = 13;
             this.btnAtualizarStatus.Text = "Atualizar Status";
-            this.btnAtualizarStatus.UseVisualStyleBackColor = true;
+            this.btnAtualizarStatus.UseVisualStyleBackColor = false;
             this.btnAtualizarStatus.Click += new System.EventHandler(this.btnAtualizarStatus_Click);
             // 
             // groupBox3
@@ -278,7 +288,7 @@
             this.dgvJogadorStatus.AllowUserToResizeColumns = false;
             this.dgvJogadorStatus.AllowUserToResizeRows = false;
             this.dgvJogadorStatus.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvJogadorStatus.BackgroundColor = System.Drawing.Color.White;
+            this.dgvJogadorStatus.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(231)))), ((int)(((byte)(220)))));
             this.dgvJogadorStatus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvJogadorStatus.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Jogador,
@@ -364,10 +374,10 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(67, 10);
+            this.label3.Font = new System.Drawing.Font("Trebuchet MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(76, 11);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(126, 25);
+            this.label3.Size = new System.Drawing.Size(117, 27);
             this.label3.TabIndex = 8;
             this.label3.Text = "Carnívoros";
             // 
@@ -429,7 +439,7 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(231)))), ((int)(((byte)(220)))));
             this.panel2.Controls.Add(this.btnAtualizar);
             this.panel2.Controls.Add(this.btnExibirTabuleiro);
             this.panel2.Controls.Add(this.txtExibirTabuleiro);
@@ -441,12 +451,15 @@
             // 
             // btnAtualizar
             // 
+            this.btnAtualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(86)))), ((int)(((byte)(66)))));
+            this.btnAtualizar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAtualizar.ForeColor = System.Drawing.Color.White;
             this.btnAtualizar.Location = new System.Drawing.Point(61, 271);
             this.btnAtualizar.Name = "btnAtualizar";
             this.btnAtualizar.Size = new System.Drawing.Size(141, 33);
             this.btnAtualizar.TabIndex = 12;
             this.btnAtualizar.Text = "Atualizar Informações";
-            this.btnAtualizar.UseVisualStyleBackColor = true;
+            this.btnAtualizar.UseVisualStyleBackColor = false;
             this.btnAtualizar.Click += new System.EventHandler(this.btnAtualizar_Click);
             // 
             // picFI1

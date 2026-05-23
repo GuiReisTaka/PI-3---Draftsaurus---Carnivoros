@@ -28,21 +28,28 @@ namespace Entrega_1___PI
             picTabuleiro.Controls.Add(picFI1); picTabuleiro.Controls.Add(picFI2);
             picTabuleiro.Controls.Add(picFI3); picTabuleiro.Controls.Add(picFI4);
             picTabuleiro.Controls.Add(picFI5); picTabuleiro.Controls.Add(picFI6);
+
             //Cercado da Diferença
             picTabuleiro.Controls.Add(picCD1); picTabuleiro.Controls.Add(picCD2);
             picTabuleiro.Controls.Add(picCD3); picTabuleiro.Controls.Add(picCD4);
             picTabuleiro.Controls.Add(picCD5); picTabuleiro.Controls.Add(picCD6);
+
             //Mata Tripla
             picTabuleiro.Controls.Add(picMT1); picTabuleiro.Controls.Add(picMT2); picTabuleiro.Controls.Add(picMT3); 
+
             //Pradaria do Amor
             picTabuleiro.Controls.Add(picPA1); picTabuleiro.Controls.Add(picPA2); picTabuleiro.Controls.Add(picPA3);
             picTabuleiro.Controls.Add(picPA4); picTabuleiro.Controls.Add(picPA5); picTabuleiro.Controls.Add(picPA6);
+
             //Ilha Solitaria
             picTabuleiro.Controls.Add(picIS1);
+
             //Rei da Selva
             picTabuleiro.Controls.Add(picRS1);
+
             //Rio
-            picTabuleiro.Controls.Add(picRI1); picTabuleiro.Controls.Add(picRI2); picTabuleiro.Controls.Add(picRI3); picTabuleiro.Controls.Add(picRI4); picTabuleiro.Controls.Add(picRI5);
+            picTabuleiro.Controls.Add(picRI1); picTabuleiro.Controls.Add(picRI2); picTabuleiro.Controls.Add(picRI3); 
+            picTabuleiro.Controls.Add(picRI4); picTabuleiro.Controls.Add(picRI5);
             foreach (Control c in picTabuleiro.Controls)
             {
                 c.Location = new Point(c.Location.X - 290, c.Location.Y - 11);
@@ -548,14 +555,72 @@ namespace Entrega_1___PI
         {
             dgvJogadorStatus.EnableHeadersVisualStyles = false;
 
-            dgvJogadorStatus.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240);
+            dgvJogadorStatus.CurrentCell = null;
 
-            dgvJogadorStatus.DefaultCellStyle.SelectionBackColor = dgvJogadorStatus.DefaultCellStyle.BackColor;
-            dgvJogadorStatus.DefaultCellStyle.SelectionForeColor = dgvJogadorStatus.DefaultCellStyle.ForeColor;
+            // Fundo geral
+            dgvJogadorStatus.BackgroundColor = ColorTranslator.FromHtml("#EAE7DC");
 
-            dgvJogadorStatus.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvJogadorStatus.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            dgvJogadorStatus.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            // Cabeçalho
+            dgvJogadorStatus.ColumnHeadersDefaultCellStyle.BackColor =
+                ColorTranslator.FromHtml("#CFC3AE");
+
+            dgvJogadorStatus.ColumnHeadersDefaultCellStyle.ForeColor =
+                ColorTranslator.FromHtml("#3B342C");
+
+            dgvJogadorStatus.ColumnHeadersDefaultCellStyle.Alignment =
+                DataGridViewContentAlignment.MiddleCenter;
+
+            // Linhas normais
+            dgvJogadorStatus.DefaultCellStyle.BackColor =
+                ColorTranslator.FromHtml("#EAE7DC");
+
+            dgvJogadorStatus.DefaultCellStyle.ForeColor =
+                ColorTranslator.FromHtml("#3B342C");
+
+            // Linhas alternadas
+            dgvJogadorStatus.AlternatingRowsDefaultCellStyle.BackColor =
+                ColorTranslator.FromHtml("#DDD2BF");
+
+            // Seleção suave
+            dgvJogadorStatus.DefaultCellStyle.SelectionBackColor =
+                ColorTranslator.FromHtml("#D6C8B4");
+
+            dgvJogadorStatus.DefaultCellStyle.SelectionForeColor =
+                ColorTranslator.FromHtml("#3B342C");
+
+            // Grid suave
+            dgvJogadorStatus.GridColor =
+                ColorTranslator.FromHtml("#C2B59B");
+
+            // Flat
+            dgvJogadorStatus.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvJogadorStatus.BorderStyle = BorderStyle.None;
+
+            // Remove lateral feia
+            dgvJogadorStatus.RowHeadersVisible = false;
+
+            // Centralização
+            dgvJogadorStatus.DefaultCellStyle.Alignment =
+                DataGridViewContentAlignment.MiddleCenter;
+
+            // Ajuste colunas
+            dgvJogadorStatus.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.Fill;
+
+            // Fonte
+            dgvJogadorStatus.DefaultCellStyle.Font =
+                new Font("Segoe UI", 9);
+
+            dgvJogadorStatus.ColumnHeadersDefaultCellStyle.Font =
+                new Font("Segoe UI Semibold", 9);
+
+            dgvJogadorStatus.RowsDefaultCellStyle.SelectionBackColor =
+                ColorTranslator.FromHtml("#D6C8B4");
+
+            dgvJogadorStatus.RowsDefaultCellStyle.SelectionForeColor =
+                ColorTranslator.FromHtml("#3B342C");
+
+            dgvJogadorStatus.CurrentCell = null;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -614,6 +679,29 @@ namespace Entrega_1___PI
         private void txtDinossauro_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnEmergencia_Click(object sender, EventArgs e)
+        {
+            /*
+            string mao = Jogo.ExibirMao(jogadorAtual.Id, jogadorAtual.Senha);
+            mao = mao.Replace("\r", "");
+            string[] dinossauros = mao.Split('\n');
+            string dinossauroEscolhido = "";
+            for (int i = 1; i < dinossauros.Length; i++)
+            {
+                if (dinossauros[i].Trim() != "")
+                {
+                    string[] dadosDino = dinossauros[i].Split(',');
+                    dinossauroEscolhido = dadosDino[0].Trim();
+                    break;
+                }
+            }
+            if (dinossauroEscolhido == "") return;
+            string resultado = Jogo.Jogar(jogadorAtual.Id, jogadorAtual.Senha, dinossauroEscolhido, "RI");
+            AtualizarTabuleiro();
+            AtualizarMao();
+            */
         }
     }
 }
