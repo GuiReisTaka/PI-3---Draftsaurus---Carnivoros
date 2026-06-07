@@ -130,7 +130,7 @@ namespace Entrega_1___PI
         private void btnEntrarPartida_Click(object sender, EventArgs e)
         {
             string senhaPartida = txtEntrarPartida.Text;
-            string nomeJogador = "Carnivoros" + DateTime.Now.Ticks % 10000;
+            string nomeJogador = "Carnivoros";
 
             if (_idPartidaSelecionada == 0)
             {
