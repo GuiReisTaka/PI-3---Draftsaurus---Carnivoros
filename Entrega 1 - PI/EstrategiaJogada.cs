@@ -115,7 +115,12 @@ namespace Entrega_1___PI
                     }
                 case "PA":
                     {
+
                         int qtdDinoNoCercado = dinosNoCercado.Count(d => d == dino);
+
+                        // Bloqueia terceiro dino 
+                        if (qtdDinoNoCercado >= 2) return -1;
+
                         return qtdDinoNoCercado % 2 == 1 ? 5 : 1;
                     }
                 case "IS":
@@ -136,9 +141,6 @@ namespace Entrega_1___PI
                     }
                 case "RS":
                     {
-                        if (turnoAtual <= 6) return -1;
-
-                        // Encontra o dino mais frequente na mão
                         string dinoMaisFrequente = "";
                         int maiorQtd = 0;
                         foreach (var par in mao)
@@ -150,7 +152,10 @@ namespace Entrega_1___PI
                             }
                         }
 
-                        return dino == dinoMaisFrequente ? 6 : 2;
+                        if (turnoAtual <= 6) return -1; 
+
+                        if (dino != dinoMaisFrequente) return -1;
+                        return 6;
                     }
                 case "RI":
                     {

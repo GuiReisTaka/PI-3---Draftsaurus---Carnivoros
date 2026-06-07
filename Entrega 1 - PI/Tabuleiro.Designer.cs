@@ -206,7 +206,7 @@
             // 
             // VerificarVezDeJogar
             // 
-            this.VerificarVezDeJogar.Interval = 2000;
+            this.VerificarVezDeJogar.Interval = 5000;
             this.VerificarVezDeJogar.Tick += new System.EventHandler(this.VerificarVezDeJogar_Tick);
             // 
             // btnExibirTabuleiro
